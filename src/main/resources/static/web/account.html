@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/img/Logo.PNG" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/styleB.css">
+
+    <!-- FONT AWESOME --> 
+    <script src="https://kit.fontawesome.com/0a7fe4ea11.js" crossorigin="anonymous"></script>
+
+    <!-- BOOTSTRAP  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Kingdom Bank | Account</title>
+</head>
+<body>
+    <div id="app">
+        <header class="sticky-top">
+          <div class="bg-header overlay-mobile">
+            <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+                <div class="container-fluid">
+                  <a class="navbar-brand logo fw-bold" href="./accounts.html"><img id="logo" src="./assets/img/Logo.PNG" alt="Logo" >Kingdom Bank</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse justify-content-end navbarNav" id="navbarNav">
+                    <ul class="navbar-nav">
+                      <hr>
+                      <li class="nav-item welcome-toggler">
+                            <h6 >Account: {{objectAccount.number}}</h6>
+                            <h6>Balance: {{objectAccount.balance}}</h6>
+                            <a @click="logOut" class="btn btn-secondary w-50">Log Out!</a>
+                      </li>
+                      <li class="nav-item welcome-expand">
+                        <a class="nav-link fw-bold text-secondary-emphasis">Account: {{objectAccount.number}}</a>
+                     </li>
+                      <hr>
+                      <li class="nav-item">
+                        <a href="./accounts.html" class="nav-link link-hover nav-link-toggler" aria-current="page" href="#">Accounts</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link link-hover nav-link-toggler" aria-current="page" href="./cards.html">Cards</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link link-hover nav-link-toggler" aria-current="page" href="#">Payments</a>
+                      </li>
+                      <hr>
+                      <li class="nav-item">
+                        <a class="nav-link welcome-toggler " aria-current="page" href="#">Contact account executive</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link welcome-toggler " href="#">Change Your Password</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link welcome-toggler " href="#">Block card</a>
+                      </li>
+                      <hr>
+                      <li class="nav-item">
+                        <a class="nav-link welcome-toggler " href="#">FAQ</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+        </div>
+        </header>
+        
+        <main class="d-flex flex-row account-main">
+          <section class="sidenav">
+            <div class="sidenav-header overlay">
+              <h3 class="sideTitle fw-bold">What we wanna do?</h3>
+            </div>
+            <nav class="nav flex-column sidebarNav">
+              <a v-for="account of objectClient.accounts.sort((a, b) => a.id - b.id)" class="nav-link" :href='"./account.html?id="+account.id'>Check: {{account.number}}</a>
+              <hr>
+              <a class="nav-link" href="#">Update Profile</a>
+              <a class="nav-link" href="#">Transfer</a>
+              <hr>
+              <a class="nav-link" href="#">Pay Services</a>
+              <a class="nav-link" href="#">Pay Insurances</a>
+              <a class="nav-link" href="#" >Pay Cards</a>
+              <hr>
+              <a class="nav-link" href="#">Contact your account executive</a>
+              <a class="nav-link" href="#">Contact Us!</a>
+              <a class="nav-link" href="#">FAQ</a>
+              <hr>
+              <div class="logOut d-flex flex-column justify-content-end align-items-center "><a @click="logOut" class="btn overlay w-50">Log Out!</a></div>
+            </nav>
+          </section>
+          <section class="table-responsive d-flex flex-column align-items-center section-table align-items-center">
+            <h1 class="align-items-start account-title">Your Transactions:</h1>
+            <table class="table table-hover table-bordered table-transactions">
+              <thead>
+                <tr class="overlay">
+                  <th scope="col">Type</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Day</th>
+                  <th scope="col">Hour</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="transaction of objectTransactions" class="table-danger">
+                  <th scope="row" v-if="transaction.type == 'CREDIT'" style="color: mediumseagreen;">{{transaction.type}}</th>
+                  <th scope="row" v-else style="color: red;">{{transaction.type}}</th>
+                  <td v-if="transaction.type == 'CREDIT'" style="color: mediumseagreen;">{{transaction.amount.toFixed(2)}}USD</td>
+                  <td v-else style="color: red;">{{transaction.amount.toFixed(2)}}USD</td>
+                  <td>{{transaction.description}}</td>
+                  <td>{{justDay(transaction.date)}}</td>
+                  <td>{{hour(transaction.date)}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </main>
+        <footer>
+          <nav>
+            <div class="footer">
+              <div class="contain">
+              <div class="col">
+                <h1 class=" fw-bold">Company</h1>
+                <ul>
+                  <li>About</li>
+                  <li>Mission</li>
+                  <li>Services</li>
+                  <li>Social</li>
+                  <li>Get in touch</li>
+                </ul>
+              </div>
+              <div class="col">
+                <h1 class=" fw-bold">Products</h1>
+                <ul>
+                  <li>HB VISTA</li>
+                  <li>HB INTERNATIONAL</li>
+                  <li>HB DEBIT</li>
+                  <li>AppBanKing app</li>
+                  <li>HB GOLDEN STAR</li>
+                </ul>
+              </div>
+              <div class="col">
+                <h1 class=" fw-bold">Accounts</h1>
+                <ul>
+                  <li>Your Accounts</li>
+                  <li>Open new!</li>
+                  <li>Add Card</li>
+                  <li>Update</li>
+                  <li>Edit</li>
+                </ul>
+              </div>
+              <div class="col">
+                <h1 class=" fw-bold">Navigation</h1>
+                <ul>
+                  <li>Accounts</li>
+                  <li>Services</li>
+                  <li>Insurances</li>
+                  <li>Cards</li>
+                  <li>Contact your account executive</li>
+                  <li>FAQ</li>
+                </ul>
+              </div>
+              <div class="col">
+                <h1 class=" fw-bold">Support</h1>
+                <ul>
+                  <li>Contact us</li>
+                  <li>Web chat</li>
+                  <li>Open ticket</li>
+                </ul>
+              </div>
+              <div class="col social">
+                <h1 class=" fw-bold">Social</h1>
+                <ul>
+                  <li><a href="https://www.facebook.com/" class="rrss"><i class="fa-brands fa-facebook"></i></a></li>
+                  <li><a href="https://twitter.com/" class="rrss"><i class="fa-brands fa-twitter"></i></a></li>
+                  <li><a href="https://www.instagram.com/" class="rrss"><i class="fa-brands fa-instagram"></i></a></li>
+                </ul>
+              </div>
+          </nav>
+          <nav class="overlay2 footer-mobile">
+             <ul class="nav ">
+                <li class="items-footer">
+                  <i class="fa-solid fa-file-invoice-dollar"></i>
+                  <a class="nav-link font" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="items-footer separation">
+                  <i class="fa-solid fa-right-left"></i>
+                  <a class="nav-link font" href="#">Transfer</a>
+                </li>
+                <li class="items-footer separation text-center">
+                  <i class="fa-solid fa-qrcode"></i>
+                  <a class="nav-link font" href="#">QR</a>
+                </li>
+                <li class="items-footer separation">
+                  <i class="fa-solid fa-file-invoice-dollar"></i>
+                  <a class="nav-link font">Accounts</a>
+                </li>
+                <li class="items-footer separation">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <a class="nav-link font">Emergency</a>
+                  </li>
+              </ul>
+           </nav>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/account.js"></script>
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/img/Logo.PNG" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/styleB.css">
+
+    <!-- FONT AWESOME --> 
+    <script src="https://kit.fontawesome.com/0a7fe4ea11.js" crossorigin="anonymous"></script>
+
+    <!-- BOOTSTRAP  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Kingdom Bank | Accounts</title>
+
+    <!-- POPPERJS -->
+    
+</head>
+<body>
+    <div id="app">
+        <header class="sticky-top">
+            <div class="bg-header overlay-mobile" >
+                <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+                    <div class="container-fluid ">
+                      <a class="navbar-brand logo fw-bold" href="#"><img id="logo" src="./assets/img/Logo.PNG" alt="Logo" >Kingdom Bank</a>
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="collapse navbar-collapse justify-content-end navbarNav" id="navbarNav">
+                        <ul class="navbar-nav">
+                          <hr>
+                          <li class="nav-item welcome-toggler">
+                                <a class="nav-link nav-link-toggler">Welcome ,</a>
+                                <h6>{{objectClient.firstName + " " + objectClient.lastName}}</h6>
+                                <h6>{{objectClient.email}}</h6>
+                                <a @click="logOut" class="btn btn-secondary w-50">Log Out!</a>
+                          </li>
+                          <li class="nav-item welcome-expand">
+                            <a class="nav-link">Welcome, {{objectClient.firstName + " " + objectClient.lastName}} <i class="fa-solid fa-hand"></i> !</a>
+                      </li>
+                          <hr>
+                          <li class="nav-item">
+                            <a class="nav-link link-hover nav-link-toggler " aria-current="page" href="./accounts.html">Accounts</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link link-hover nav-link-toggler fw-bold text-secondary-emphasis" aria-current="page" href="./cards.html">Cards</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link link-hover nav-link-toggler" aria-current="page" href="./account.html?id=1">Your transactions</a>
+                          </li>
+                          <hr>
+                          <li class="nav-item">
+                            <a class="nav-link welcome-toggler " aria-current="page" href="#">Contact account executive</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link welcome-toggler " href="#">Change Your Password</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link welcome-toggler " href="#">Block card</a>
+                          </li>
+                          <hr>
+                          <li class="nav-item">
+                            <a class="nav-link welcome-toggler " href="#">FAQ</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </nav>
+            </div>
+        </header >
+        <main class="d-flex flex-row">
+            <section class="sidenav">
+              <div class="sidenav-header overlay">
+                <h3 class="sideTitle fw-bold">What we wanna do?</h3>
+              </div>
+              <nav class="nav flex-column sidebarNav sidenav-body">
+                <a class="nav-link" href="#">Update Profile</a>
+                <a class="nav-link" href="#">Transfer</a>
+                <hr v-if="cards.length < 6">
+                <div class=" addNew ">
+                  <a v-if="cards.length < 6" href="./createCards.html" class="btn overlay w-60">Add Card</a>
+                </div>
+                <hr>
+                <a class="nav-link" href="#">Pay Services</a>
+                <a class="nav-link" href="#">Pay Insurances</a>
+                <a class="nav-link" href="#" >Pay Cards</a>
+                <hr>
+                <a class="nav-link" href="#">Contact your account executive</a>
+                <a class="nav-link" href="#">Contact Us!</a>
+                <a class="nav-link" href="#">FAQ</a>
+                <hr>
+                  <div class="logOut d-flex flex-column justify-content-end align-items-center "><a @click="logOut" class="btn overlay w-50">Log Out!</a></div>
+                
+              </nav>
+            </section>
+            
+            <div class="d-flex flex-column aside-sidenav" >
+              <section v-if="cards.length > 0" class="accountCard-section main-sections">
+                <h2>Cards:</h2>
+                <div id="carouselExample" class="carousel" data-bs-theme="light">
+                  <div class="carousel-inner " >
+                    <div class="carousel-item active text-center "  v-for="card of cards">
+                      <div class="card card-account">
+                        <div class="card-header overlay">
+                          {{objectClient.firstName}}'s Card: {{card.color}}
+                        </div>
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+
+                          <div class="solo-card">
+                            <!-- CARD FRONT -->
+                            <div v-if="card.color == 'GOLD'" class=" card__front card__part cardGold">   
+                              <div class="d-flex justify-content-between ">  
+                                <img class="card__front-square card__square" id="logo-card" src="./assets/img/Logo.PNG">
+                                <span>{{card.color}}</span>
+                                <span class="card__label">{{card.type}}</span>
+                                <img class="card__front-logo card__logo" src="./assets/img/logovisa.png">
+                              </div>
+                              <p class="card_numer">**** **** **** {{card.number.slice(15)}}</p>
+                              <div class="card__space-75">
+                                <span class="card__label">Card holder</span>
+                                <p class="card__info">{{card.cardholder}}</p>
+                              </div>
+                              <div class="card__space-25">
+                                <span class="card__label">Expires</span>
+                                      <p class="card__info">{{cardDate(card.thruDate.slice(2))}}</p>
+                              </div>
+                            </div>
+                            <div v-else-if="card.color == 'SILVER'" class=" card__front card__part cardSilver">   
+                                <div class="d-flex justify-content-between ">  
+                                  <img class="card__front-square card__square" id="logo-card" src="./assets/img/Logo.PNG">
+                                  <span>{{card.color}}</span>
+                                  <span class="card__label">{{card.type}}</span>
+                                  <img class="card__front-logo card__logo" src="./assets/img/logovisa.png">
+                                </div>
+                                <p class="card_numer">**** **** **** {{card.number.slice(15)}}</p>
+                                <div class="card__space-75">
+                                  <span class="card__label">Card holder</span>
+                                  <p class="card__info">{{card.cardholder}}</p>
+                                </div>
+                                <div class="card__space-25">
+                                  <span class="card__label">Expires</span>
+                                        <p class="card__info">{{cardDate(card.thruDate.slice(2))}}</p>
+                                </div>
+                              </div>
+                              <div v-else-if="card.color == 'TITANIUM'" class=" card__front card__part cardTitanium">   
+                                <div class="d-flex justify-content-between ">  
+                                  <img class="card__front-square card__square" id="logo-card" src="./assets/img/Logo.PNG">
+                                  <span>{{card.color}}</span>
+                                  <span class="card__label">{{card.type}}</span>
+                                  <img class="card__front-logo card__logo" src="./assets/img/logovisa.png">
+                                </div>
+                                <p class="card_numer">**** **** **** {{card.number.slice(15)}}</p>
+                                <div class="card__space-75">
+                                  <span class="card__label">Card holder</span>
+                                  <p class="card__info">{{card.cardholder}}</p>
+                                </div>
+                                <div class="card__space-25">
+                                  <span class="card__label">Expires</span>
+                                        <p class="card__info">{{cardDate(card.thruDate.slice(2))}}</p>
+                                </div>
+                              </div>
+                            <!-- CARD-BACK -->
+                            <div v-if="card.color == 'GOLD'" class="card__back card__part cardGold">
+                              <div class="card__black-line"></div>
+                              <div class="card__back-content">
+                                <div class="card__secret">
+                                  <p class="card__secret--last">{{card.cvv}}</p>
+                                </div>
+                                <p id="textBack-card">This card is property of client {{}}. Its usage is personal and unstranferible and is linked to the subscribed contract. Card avaible for five years, counting from: {{cardDate(card.fromDate)}}.</p>  
+                                        
+                              </div>
+                            </div>
+                            <div v-else-if="card.color == 'SILVER'" class="card__back card__part cardSilver">
+                                <div class="card__black-line"></div>
+                                <div class="card__back-content">
+                                  <div class="card__secret">
+                                    <p class="card__secret--last">{{card.cvv}}</p>
+                                  </div>
+                                  <p id="textBack-card">This card is property of client {{objectClient.firstName}} {{objectClient.lastName}}. Its usage is personal and unstranferible and is linked to the subscribed contract. Card avaible for five years, counting from: {{cardDate(card.fromDate)}}.</p>  
+                                          
+                                </div>
+                            </div>
+                            <div v-else-if="card.color == 'TITANIUM'" class="card__back card__part cardTitanium">
+                                <div class="card__black-line"></div>
+                                <div class="card__back-content">
+                                  <div class="card__secret">
+                                    <p class="card__secret--last">{{card.cvv}}</p>
+                                  </div>
+                                  <p id="textBack-card">This card is property of client {{objectClient.firstName}} {{objectClient.lastName}}. Its usage is personal and unstranferible and is linked to the subscribed contract. Card avaible for five years, counting from: {{cardDate(card.fromDate)}}.</p>  
+                                          
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="" aria-hidden="true"><i class="fa-solid fa-chevron-left next-prev-icon"></i></span>
+                    
+                    <span class="visually-hidden ">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span aria-hidden="true"><i class="fa-solid fa-chevron-right next-prev-icon"></i></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+              </section>
+              <section v-else class="accountCard-section main-sections">
+                <h2>Cards:</h2>
+                <div id="carouselExample" class="carousel" data-bs-theme="light">
+                  <div class="carousel-inner ">
+                    <div class="carousel-item active text-center">
+                      <div class="card card-account">
+                        <div class="card-header">
+                          Your Cards:
+                        </div>
+                        <div class="card-body ">
+                          <p class="card-text">{{objectClient.firstName}}, you currently do not posses any card, </p>
+                          <p class="fw-bold"> but don't worry!</p>
+                          <p class="card-text">We have an excellent option for you. Click bellow on the ''Get Your First Card'' to get more info, or click the button bellow.</p>
+                          
+                        </div>
+                        <div class="card-footer">
+                          <a href="./createCards.html" class="btn overlay">Create Card</a>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="" aria-hidden="true"><i class="fa-solid fa-chevron-left next-prev-icon"></i></span>
+                    
+                    <span class="visually-hidden ">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span aria-hidden="true"><i class="fa-solid fa-chevron-right next-prev-icon"></i></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+              </section>
+              <!-- Dropdowns Menu -->
+              <section v-if="cards.length > 0" class="dropdown-menues main-sections">
+                <h2>Cards info:</h2>
+                <nav class="button" >
+                    <div>
+                      
+                      <button class="navbar-toggler d-flex justify-content-between options overlay" type="button" data-bs-toggle="collapse" data-bs-target="#collapsable-btn-credit" aria-controls="collapsable-btn" aria-expanded="false" aria-label="Toggle navigation">
+                        <div class="d-flex flex-row"> <p class="options-paragraphs fw-semibold">Your Credit Cards </p> <p>(click here)</p></div>
+                        <!-- aqui icono flecha -->
+                      <i class="fa-solid fa-caret-down"></i>
+                      </button>
+                      <div class="collapse navbar-collapse justify-content-end" id="collapsable-btn-credit" >
+                        <ul class="navbar-nav" >
+                          <li v-for="card of cards"  class="nav-item">
+                                <a title="click here!" v-if="card.type === 'CREDIT'" class="nav-link collapsable-link">{{card.type}} {{card.color}} (See more transactions)</a>
+                          </li>
+                        </ul>
+                      </div>
+                      
+                    </div>
+                  </nav>
+                  <nav class="button" >
+                    <div>
+                      
+                      <button class="navbar-toggler d-flex justify-content-between options overlay" type="button" data-bs-toggle="collapse" data-bs-target="#collapsable-btn-debit" aria-controls="collapsable-btn" aria-expanded="false" aria-label="Toggle navigation">
+                        <div class="d-flex flex-row"> <p class="options-paragraphs fw-semibold">Your Debit Cards </p> <p>(click here)</p></div>
+                        <!-- aqui icono flecha -->
+                      <i class="fa-solid fa-caret-down"></i>
+                      </button>
+                      <div class="collapse navbar-collapse justify-content-end" id="collapsable-btn-debit" >
+                        <ul class="navbar-nav" >
+                          <li v-for="card of cards"  class="nav-item">
+                                <a title="click here!" v-if="card.type === 'DEBIT'" class="nav-link collapsable-link">{{card.type}} {{card.color}} (See more transactions)</a>
+                          </li>
+                        </ul>
+                      </div>
+                      
+                    </div>
+                  </nav>
+              </section>
+              <section v-else class="dropdown-menues main-sections">
+                <h2>Get Cards:</h2>
+                <nav class="button" >
+                    <div>
+                      
+                      <button class="navbar-toggler d-flex justify-content-between options overlay" type="button" data-bs-toggle="collapse" data-bs-target="#collapsable-btn" aria-controls="collapsable-btn" aria-expanded="false" aria-label="Toggle navigation">
+                        <div class="d-flex flex-row"> <p class="options-paragraphs fw-semibold">Get yout first card </p> <p>(click here)</p></div>
+                        <!-- aqui icono flecha -->
+                      <i class="fa-solid fa-caret-down"></i>
+                      </button>
+                      <div class="collapse navbar-collapse justify-content-end" id="collapsable-btn">
+                        <ul class="navbar-nav">
+                          <li class="nav-item">
+                                <a href="createCards.html" class="nav-link collapsable-link">Request your card.</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link collapsable-link" aria-current="page" href="#">Requirements.</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link collapsable-link" href="#">More Info.</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link collapsable-link" href="#">Any other questions? Please contact us!</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </nav>
+              </section>
+              <section class="dropdown-menues main-sections">
+            <h2>Insurances:</h2>
+            <nav class="button" >
+              <div>
+                
+                <button class="navbar-toggler d-flex justify-content-between options overlay" type="button" data-bs-toggle="collapse" data-bs-target="#collapsable-btn-3" aria-controls="collapsable-btn-3" aria-expanded="false" aria-label="Toggle navigation">
+                  <div class="d-flex flex-row"> <p class="options-paragraphs fw-semibold">Your Insurances </p> <p>(click here)</p></div>
+                  <!-- aqui icono flecha -->
+                <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="collapsable-btn-3">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                          <a class="nav-link collapsable-link">Request.</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link collapsable-link" aria-current="page" href="#">Requirements.</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link collapsable-link" href="#">More Info.</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link collapsable-link" href="#">Any other questions? Please contact us!</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+              </section>
+              <section class="dropdown-menues main-sections">
+                <h2>Loans:</h2>
+                <nav class="button" >
+                  <div>
+                    
+                    <button class="navbar-toggler d-flex justify-content-between options overlay" type="button" data-bs-toggle="collapse" data-bs-target="#collapsable-btn-2" aria-controls="collapsable-btn-2" aria-expanded="false" aria-label="Toggle navigation">
+                     <div class="d-flex flex-row"> <p class="options-paragraphs fw-semibold">Your Loans </p> <p>(click here)</p></div>
+                      <!-- aqui icono flecha -->
+                    <i class="fa-solid fa-caret-down"></i>
+                    </button>
+                    <div v-if="loans.length > 0" class=" collapse navbar-collapse justify-content-end" id="collapsable-btn-2">
+                      <ul class="navbar-nav">
+                        <li class="nav-item"  v-for="loan of loans">                        
+                              <a title="clic here"  class="nav-link collapsable-link d-flex justify-content-between loan-btn" data-bs-toggle="modal" :data-bs-target='"#exampleModal"+loan.id'>{{loan.name.toUpperCase()}}<i data-bs-toggle="mssg" title="Open for more info about your Loan" class="fa-solid fa-circle-info" ></i></a>
+                              <div class="modal fade" :id='"exampleModal"+loan.id' tabindex="-1" :aria-labelledby='"exampleModalLabel"+loan.id' aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="btn overlay">{{loan.name.toUpperCase()}}</button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <h1 class="modal-title fs-5" :id='"exampleModalLabel"+loan.id'>Loan info:</h1>
+                                      <ul>
+                                        <li>Required amount: {{loan.amount.toFixed(2)}}USD</li>
+                                        <li>in {{loan.payments}} payments</li>
+                                        <li>loan id: #{{loan.id}}</li>
+                                      </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link collapsable-link" href="#">More Info.</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link collapsable-link" href="#">Any other questions? Please contact us!</a>
+                        </li>
+                      </ul>
+                    </div>
+                  <!-- V-ELSE -->
+                    <div v-else class="collapse navbar-collapse justify-content-end" id="collapsable-btn-2">
+                        <ul class="navbar-nav">
+                        <li class="nav-item">
+                          <a class="nav-link collapsable-link">Request.</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link collapsable-link" aria-current="page" href="#">Requirements.</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link collapsable-link" href="#">More Info.</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link collapsable-link" href="#">Any other questions? Please contact us!</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </nav>
+                  </section>
+              
+            </div>
+        </main>
+        <footer >
+            <nav>
+              <div class="footer">
+                <div class="contain">
+                <div class="col">
+                  <h1 class=" fw-bold">Company</h1>
+                  <ul>
+                    <li>About</li>
+                    <li>Mission</li>
+                    <li>Services</li>
+                    <li>Social</li>
+                    <li>Get in touch</li>
+                  </ul>
+                </div>
+                <div class="col">
+                  <h1 class=" fw-bold">Products</h1>
+                  <ul>
+                    <li>HB VISTA</li>
+                    <li>HB INTERNATIONAL</li>
+                    <li>HB DEBIT</li>
+                    <li>AppBanKing app</li>
+                    <li>HB GOLDEN STAR</li>
+                  </ul>
+                </div>
+                <div class="col">
+                  <h1 class=" fw-bold">Accounts</h1>
+                  <ul>
+                    <li>Your Accounts</li>
+                    <li>Open new!</li>
+                    <li>Add Card</li>
+                    <li>Update</li>
+                    <li>Edit</li>
+                  </ul>
+                </div>
+                <div class="col">
+                  <h1 class=" fw-bold">Navigation</h1>
+                  <ul>
+                    <li>Accounts</li>
+                    <li>Services</li>
+                    <li>Insurances</li>
+                    <li>Cards</li>
+                    <li>Contact your account executive</li>
+                    <li>FAQ</li>
+                  </ul>
+                </div>
+                <div class="col">
+                  <h1 class=" fw-bold">Support</h1>
+                  <ul>
+                    <li>Contact us</li>
+                    <li>Web chat</li>
+                    <li>Open ticket</li>
+                  </ul>
+                </div>
+                <div class="col social">
+                  <h1 class=" fw-bold">Social</h1>
+                  <ul>
+                    <li><a href="https://www.facebook.com/" class="rrss"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com/" class="rrss"><i class="fa-brands fa-twitter"></i></a></li>
+                    <li><a href="https://www.instagram.com/" class="rrss"><i class="fa-brands fa-instagram"></i></a></li>
+                  </ul>
+                </div>
+            </nav>
+            <nav class="overlay2 footer-mobile">
+                <ul class="nav ">
+                    <li class="items-footer">
+                      <i class="fa-solid fa-file-invoice-dollar"></i>
+                      <a class="nav-link font" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="items-footer separation">
+                      <i class="fa-solid fa-right-left"></i>
+                      <a class="nav-link font" href="#">Transfer</a>
+                    </li>
+                    <li class="items-footer separation text-center">
+                      <i class="fa-solid fa-qrcode"></i>
+                      <a class="nav-link font" href="#">QR</a>
+                    </li>
+                    <li class="items-footer separation">
+                      <i class="fa-solid fa-file-invoice-dollar"></i>
+                      <a class="nav-link font">Accounts</a>
+                    </li>
+                    <li class="items-footer separation">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <a class="nav-link font">Emergency</a>
+                      </li>
+                  </ul>
+            </nav>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/cards.js"></script>
+    <script>
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="mssg"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+</body>
+</html>
