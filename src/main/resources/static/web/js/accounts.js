@@ -8,24 +8,25 @@ createApp({
             accountTransactions: undefined,
             loans: [],
             type: '',
-            color: ''
-            
+            color: '',
+            transactionId: undefined
         }
 
 	},
 	created(){
-        this.cargarDatos()
+        this.loadData()
         
 	},
 
     methods: {
-        cargarDatos (){
+        loadData (){
             axios.get("http://localhost:8080/api/clients/current")
                 .then(response =>{
                    this.objectClient = response.data
                    this.accounts = this.objectClient.accounts
                    this.accountTransactions = this.accounts.forEach(element => console.log(element.transactions.slice(0, 3)));
                    this.loans = this.objectClient.loans
+                   this.transactionId = this.accounts[0].id
                    
                    
                    
@@ -51,7 +52,7 @@ createApp({
       
                 })
                 .then( response => {
-                    this.cargarDatos()
+                    this.loadData()
                 })
                 
             })

@@ -13,24 +13,12 @@ createApp({
 
 	},
 	created(){
-        this.cargarDatosCuenta()
-        this.cargarDatosClx()
+        this.loadDataCuenta()
+        this.loadDataClx()
         
 	},
     methods: {
-        /* cargarDatosCuenta (){
-            let url = new URLSearchParams(location.search)
-            let id = url.get("id")
-            axios.get(`http://localhost:8080/api/accounts/${id}`)
-                .then(response =>{
-                   this.dataAccounts = response
-                   this.objectAccount = this.dataAccounts.data
-                   this.objectTransactions = this.objectAccount.transactions.sort((a, b)=> new Date(b.date).getTime() - new Date(a.date).getTime())
-                   console.log(this.dataAccounts)
-                })
-                .catch(error => console.log(error))
-        }, */
-        cargarDatosCuenta(){
+        loadDataCuenta(){
             let id = new URLSearchParams(location.search).get("id")
             axios("http://localhost:8080/api/clients/current/accounts")
             .then(response =>{
@@ -41,7 +29,7 @@ createApp({
             })
             .catch(error => console.log(error))
         },
-        cargarDatosClx(){
+        loadDataClx(){
             axios.get("http://localhost:8080/api/clients/current")
             .then(response =>{
                 this.objectClient = response.data

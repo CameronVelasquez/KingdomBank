@@ -47,7 +47,7 @@
                             <a class="nav-link link-hover nav-link-toggler" aria-current="page" href="./cards.html">Cards</a>
                           </li >
                           <li class="nav-item">
-                            <a  class="nav-link link-hover nav-link-toggler" aria-current="page" href="./account.html?id=1">Your transactions</a>
+                            <a  class="nav-link link-hover nav-link-toggler" aria-current="page" :href='"account.html?id="+transactionId'>Your transactions</a>
                           </li>
                           <hr>
                           <li class="nav-item">
@@ -114,8 +114,9 @@
                   <a class="nav-link" href="#">Transfer</a>
                   <hr v-if="accounts.length < 3" >
                   <div v-if="accounts.length < 3" class=" addNew ">
-                    <a @click="createAccounts"  class="btn overlay w-60">Add Account</a> 
-                </div>
+                    <a @click="createAccounts"  class="btn addButton w-60">Add Account</a> 
+                  </div>
+                  <div class="addNew mt-2"><a class="btn addButton w-60" href="./transfers.html">Transfer money</a>   </div>             
                   <hr >
                   <a class="nav-link" href="#">Pay Services</a>
                   <a class="nav-link" href="#">Pay Insurances</a>

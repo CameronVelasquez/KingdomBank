@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,7 @@ public class TransactionController {
     AccountRepository accountRepository;
     @Autowired
     ClientRepository clientRepository;
+    @Transactional
     @RequestMapping(path = "/api/transactions", method = RequestMethod.POST)
     public ResponseEntity<Object> createTransactions(Authentication authentication,
 
@@ -37,8 +39,11 @@ public class TransactionController {
         Account originAccount = accountRepository.findByNumber(accountNumber);
         Account destiniAccount = accountRepository.findByNumber(destinyAccount);
 
-        if (amount.isNaN()) {
-            return new ResponseEntity<>("Amount field is empty", HttpStatus.FORBIDDEN);
+        if (amount.isNaN() ) {
+            return new ResponseEntity<>("Amount field is empty",HttpStatus.FORBIDDEN);
+        }
+        if(amount < 1){
+            return new ResponseEntity<>("try a higher amount", HttpStatus.FORBIDDEN);
         }
         else if (description.isEmpty()) {
             return new ResponseEntity<>("Missing description", HttpStatus.FORBIDDEN);
@@ -49,7 +54,7 @@ public class TransactionController {
         else if (destinyAccount.isEmpty()) {
             return new ResponseEntity<>("Missing receptor account number", HttpStatus.FORBIDDEN);
         }
-        else if(accountNumber == destinyAccount){
+        else if(accountNumber.equals(destinyAccount)){
             return new ResponseEntity<>("The origin account can't be the same as the reception account", HttpStatus.BAD_REQUEST);
         }
         else if(!accountRepository.existsByNumber(accountNumber)){

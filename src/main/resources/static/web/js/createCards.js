@@ -15,12 +15,12 @@ createApp({
 
 	},
 	created(){
-        this.cargarDatos()
+        this.loadData()
         
 	},
 
     methods: {
-        cargarDatos (){
+        loadData (){
             axios.get("http://localhost:8080/api/clients/current")
                 .then(response =>{
                    this.objectClient =response.data

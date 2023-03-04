@@ -182,13 +182,14 @@ h1{
     width: 100%;
 }
 .addButton:hover {
-  background: #2d2a2a ;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #673d3d);
-	background: linear-gradient(to right, #FF4B2B, #673d3d);
+  background: #FF4B2B ;
+	background: -webkit-linear-gradient(to right,#FF416C, #FF4B2B );
+	background: linear-gradient(to right,#FF416C, #FF4B2B );
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
 	color: #FFFFF0 !important;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.6);
     width: 100%;
 }
 /* MAIN */
