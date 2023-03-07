@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class AccountDTO {
 
-    private long id;
+    private Long id;
     private String number;
     private LocalDateTime creationDate;
     private double balance;
@@ -39,7 +39,7 @@ public class AccountDTO {
         return balance;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

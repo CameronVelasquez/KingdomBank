@@ -111,12 +111,17 @@
                 <nav class="nav flex-column sidebarNav sidenav-body">
                   
                   <a class="nav-link" href="#">Update Profile</a>
-                  <a class="nav-link" href="#">Transfer</a>
+                  <a class="nav-link" href="./transfers.html">Transfer</a>
                   <hr v-if="accounts.length < 3" >
                   <div v-if="accounts.length < 3" class=" addNew ">
                     <a @click="createAccounts"  class="btn addButton w-60">Add Account</a> 
                   </div>
-                  <div class="addNew mt-2"><a class="btn addButton w-60" href="./transfers.html">Transfer money</a>   </div>             
+                  <div class="addNew mt-2">
+                    <a class="btn addButton w-60" href="./transfers.html">Transfer money</a> 
+                  </div>       
+                  <div class="addNew mt-2">
+                    <a class="btn addButton w-60" href="./loanApplication.html">Apply (loan)</a> 
+                  </div>        
                   <hr >
                   <a class="nav-link" href="#">Pay Services</a>
                   <a class="nav-link" href="#">Pay Insurances</a>

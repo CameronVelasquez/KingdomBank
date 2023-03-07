@@ -369,7 +369,6 @@ advertise, accounts & cards
 z-index: 1000;
   left: 0;
   background-color: #5f5454 !important;
-  color: #FFFFFF !important;
   display: inline-block;
     width: 320px;
     height: 190px;
@@ -397,7 +396,7 @@ z-index: 1000;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
-  color: var(--w-complement) !important;
+  color: #000000 !important;
 }
 .cardSilver{
 	background: #d1d3b3;
@@ -465,7 +464,9 @@ transform: rotateY(-180deg);
     margin-bottom: 20px;
     margin-top: 20px;
 }
-
+.card_numer_Gold{
+  color: #000000;
+}
 .card__space-75 {
     width: 75%;
     float: left;
@@ -482,6 +483,11 @@ transform: rotateY(-180deg);
     color: rgba(255,255,255,0.8);
     letter-spacing: 1px;
 }
+.card_label_Gold{
+  color: #000000;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
 
 .card__info {
     margin-bottom: 0;
@@ -492,7 +498,10 @@ transform: rotateY(-180deg);
   letter-spacing: 1px;
   text-transform: uppercase;
 }
-
+.card_info_Gold{
+  color: #000000;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.6);
+}
 .card__back-content {
     padding: 15px 15px 0;
 }

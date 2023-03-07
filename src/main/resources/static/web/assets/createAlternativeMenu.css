@@ -280,6 +280,11 @@ border-radius: 4px;
 }
 
 /* Mediaqueries */
+@media(max-width:328px){
+  .monthlyPayment{
+    font-size: 15px !important;
+  }
+}
 @media(min-width:320px) and (max-width:900px){
     #cardTemplate{
         display: none;

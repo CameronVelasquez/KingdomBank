@@ -31,7 +31,7 @@ public class TransactionController {
     @RequestMapping(path = "/api/transactions", method = RequestMethod.POST)
     public ResponseEntity<Object> createTransactions(Authentication authentication,
 
-            @RequestParam Double amount, @RequestParam String description,
+            @RequestParam (required = false) Double amount, @RequestParam String description,
             @RequestParam String accountNumber, @RequestParam String destinyAccount){
 
 
@@ -39,7 +39,7 @@ public class TransactionController {
         Account originAccount = accountRepository.findByNumber(accountNumber);
         Account destiniAccount = accountRepository.findByNumber(destinyAccount);
 
-        if (amount.isNaN() ) {
+        if (amount == null ) {
             return new ResponseEntity<>("Amount field is empty",HttpStatus.FORBIDDEN);
         }
         if(amount < 1){

@@ -10,7 +10,7 @@ public class ClientLoan {
      @Id
      @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
      @GenericGenerator(name = "native", strategy = "native")
-     private long id;
+     private Long id;
      private double amountSelected;
      private int paymentSelected;
      @ManyToOne(fetch = FetchType.EAGER)
@@ -28,7 +28,7 @@ public class ClientLoan {
          this.loan= loan;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
     public double getAmountSelected() {

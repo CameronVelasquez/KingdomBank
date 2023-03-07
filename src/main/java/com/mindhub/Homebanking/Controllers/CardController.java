@@ -11,11 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +39,7 @@ public class CardController {
         if (authenticatedClient.getCards().stream().anyMatch(card -> type == card.getType() && color == card.getColor()) ){
             return new ResponseEntity<>("Already have this card category", HttpStatus.FORBIDDEN);}
 
-         Card addNewCard = new Card(type, color, authenticatedClient, cvv(), randomNumberCard(cardRepository));
+         Card addNewCard = new Card(type, color, authenticatedClient, cvv(), randomNumberCard(cardRepository), LocalDate.now(), LocalDate.now().plusYears(5));
          cardRepository.save(addNewCard);
 
         return new  ResponseEntity<>("New card created", HttpStatus.CREATED);
@@ -53,4 +51,32 @@ public class CardController {
         return client.getCards().stream().map(account -> new CardDTO(account)).collect(toList());
     }
 
+    //EXTRAS: Delete cards
+    @RequestMapping(path = "/api/clients/current/cards", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> deleteCards (Authentication authentication, @RequestParam String number){
+
+        Client authenticatedClient = clientRepository.findByEmail(authentication.getName());
+        Card getCardToDelete = cardRepository.findByNumber(number);
+
+            if(authenticatedClient.getCards().stream().noneMatch(card -> card == getCardToDelete)){
+                return new ResponseEntity<>("You do not posses this card", HttpStatus.FORBIDDEN);}
+            if( getCardToDelete.getCardholder().isEmpty()){
+                return new  ResponseEntity<>("You must select Cardholder option", HttpStatus.BAD_REQUEST);}
+            if( getCardToDelete.getType().toString().isEmpty()){
+                return new  ResponseEntity<>("You must select a card type option", HttpStatus.BAD_REQUEST);}
+            if( getCardToDelete.getColor().toString().isEmpty()){
+                return new  ResponseEntity<>("You must select a card color option", HttpStatus.BAD_REQUEST);}
+            if( getCardToDelete.getCvv().isEmpty()){
+                return new  ResponseEntity<>("You must select CVV option", HttpStatus.BAD_REQUEST);}
+            if( getCardToDelete.getFromDate().toString().isEmpty()){
+                return new  ResponseEntity<>("You must select Date of Creation option", HttpStatus.BAD_REQUEST);}
+            if( getCardToDelete.getThruDate().toString().isEmpty()){
+                return new  ResponseEntity<>("You must select Date of Expiration option", HttpStatus.BAD_REQUEST);}
+
+
+
+        cardRepository.deleteById(getCardToDelete.getId());
+
+        return new ResponseEntity<>("Card successfully deleted!", HttpStatus.OK);
+    }
 }

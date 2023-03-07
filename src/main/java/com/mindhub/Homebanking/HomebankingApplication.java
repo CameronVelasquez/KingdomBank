@@ -110,12 +110,12 @@ public class HomebankingApplication {
 			ClientLoan Loan4 = new ClientLoan(200000.00, 32, Cameron, automotive);
 
 			//Cards for Melba
-			Card card1 = new Card(CardType.DEBIT, CardColor.GOLD, Melba, cvv(),randomString());
-			Card card2 = new Card(CardType.CREDIT, CardColor.TITANIUM, Melba, cvv(), randomNumberCard(cardRepository) );
-			Card cardSample = new Card(CardType.CREDIT, CardColor.SILVER, Melba, cvv(), randomNumberCard(cardRepository));
+			Card card1 = new Card(CardType.DEBIT, CardColor.GOLD, Melba, cvv(),randomString(), LocalDate.now(), LocalDate.now().plusYears(5));
+			Card card2 = new Card(CardType.CREDIT, CardColor.TITANIUM, Melba, cvv(), randomNumberCard(cardRepository), LocalDate.now(), LocalDate.now().plusYears(5) );
+			Card cardSample = new Card(CardType.CREDIT, CardColor.SILVER, Melba, cvv(), randomNumberCard(cardRepository), LocalDate.now().minusYears(5), LocalDate.now().minusDays(1));
 
 			//Cards Client2
-			Card card3 = new Card(CardType.CREDIT, CardColor.SILVER, Cameron, cvv(), randomNumberCard(cardRepository));
+			Card card3 = new Card(CardType.CREDIT, CardColor.SILVER, Cameron, cvv(), randomNumberCard(cardRepository), LocalDate.now(), LocalDate.now().plusYears(5));
 
 			//Melba.addCard(card1);
 			//Melba.addCard(card2);

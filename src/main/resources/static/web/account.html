@@ -105,7 +105,7 @@
                   <th scope="row" v-if="transaction.type == 'CREDIT'" style="color: mediumseagreen;">{{transaction.type}}</th>
                   <th scope="row" v-else style="color: red;">{{transaction.type}}</th>
                   <td v-if="transaction.type == 'CREDIT'" style="color: mediumseagreen;">{{transaction.amount.toFixed(2)}}USD</td>
-                  <td v-else style="color: red;">{{transaction.amount.toFixed(2)}}USD</td>
+                  <td v-else style="color: red;">-{{transaction.amount.toFixed(2)}}USD</td>
                   <td>{{transaction.description}}</td>
                   <td>{{justDay(transaction.date)}}</td>
                   <td>{{hour(transaction.date)}}</td>

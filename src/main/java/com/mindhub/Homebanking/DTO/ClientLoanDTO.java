@@ -3,8 +3,8 @@ package com.mindhub.Homebanking.DTO;
 import com.mindhub.Homebanking.Models.ClientLoan;
 
 public class ClientLoanDTO {
-    private long id;
-    private long loanId;
+    private Long id;
+    private Long loanId;
     private String name;
     private double amount;
     private int payments;
@@ -18,11 +18,11 @@ public class ClientLoanDTO {
         this.amount = clientLoan.getAmountSelected();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public long getLoanId() {
+    public Long getLoanId() {
         return loanId;
     }
 

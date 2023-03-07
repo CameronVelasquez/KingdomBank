@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/img/Logo.PNG" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/createAlternativeMenu.css">
+
+    <!-- FONT AWESOME --> 
+    <script src="https://kit.fontawesome.com/0a7fe4ea11.js" crossorigin="anonymous"></script>
+
+    <!-- BOOTSTRAP  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Kingdom Bank | Accounts</title>
+
+    
+    
+</head>
+<body>
+    <main id="app" class="d-flex flex-column gap-5">
+
+        <!-- cards  -->
+        <div class="card cardTransfer text-center card-select">
+            <div class="fw-bold card-header">
+              Apply to a new Loan bellow. Enter the fields to begin!
+            </div>
+            <div class="cardTransfer-body card-body d-flex flex-column gap-4">
+                <div  class="mobileSelect">
+                    <p class="selectTitles">Select Loan:</p>
+                    <select @change="changed" v-model="loanId" title="Open this select menu" class="form-select selectAccountwidth" aria-label="Default select example" >
+                        <option value="" disabled selected>Select Loan option</option>
+                        <option v-for="loan of loans" :value="loan.id">{{loan.name}}</option>
+                    </select>
+                  </div>   
+              <!-- second request -->
+              <div class="mobileSelect">
+                <p class="selectTitles">Payments:</p>
+                <select v-model="paymentSelected" title="Open this select menu" class="form-select selectAccountwidth" aria-label="Default select example" >
+                    <option value="" disabled selected>Select payment option</option>
+                    <option v-for="payment of listOfPayments" :value="payment" >{{payment}}</option>
+                </select>
+                <p class="selectTitles">destiny account:</p>
+                <select v-model="accountNumber" title="Open this select menu" class="form-select selectAccountwidth" aria-label="Default select example" >
+                    <option value="" disabled selected>Select destiny account</option>
+                    <option v-for="account of accounts" :value="account.number">{{account.number}}</option>
+                </select>
+              </div>              
+              <form class=" d-flex flex-column gap-3">
+                <input v-model="amountSelected" type="number" min="0" placeholder="Write the loan amount to request"/>           
+             </form>
+             <section  class="p-0 m-0">
+                <h4 class="monthlyPayment">Monthly amount to pay:</h4>
+                <h4 class="monthlyPayment" v-if="amountSelected != null">USD {{monthlyPayments()}}</h4>
+                <h4 class="monthlyPayment" v-else>USD 0.00</h4>
+             </section>
+            </div>
+            <div class="card-footer text-muted ">
+              <button @click="alertApply" type="submit" class="btn overlay">Apply Now!</button >
+            </div>
+          </div>
+    </main>
+    <footer class="d-flex justify-content-end pt-5">
+        <a href="./accounts.html" class="btn bg-secondary">Back to Accounts</a>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/loanApplication.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

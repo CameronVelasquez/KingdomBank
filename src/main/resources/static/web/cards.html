@@ -109,24 +109,24 @@
 
                           <div class="solo-card">
                             <!-- CARD FRONT -->
-                            <div v-if="card.color == 'GOLD'" class=" card__front card__part cardGold">   
+                            <div v-if="card.color == 'GOLD' && card.thruDate >= currentCardDate" class=" card__front card__part cardGold">   
                               <div class="d-flex justify-content-between ">  
                                 <img class="card__front-square card__square" id="logo-card" src="./assets/img/Logo.PNG">
                                 <span>{{card.color}}</span>
-                                <span class="card__label">{{card.type}}</span>
-                                <img class="card__front-logo card__logo" src="./assets/img/logovisa.png">
+                                <span class="card__label card_label_Gold">{{card.type}}</span>
+                                <img class="card__front-logo card__logo" src="./assets/img/logovisa_Gold.png">
                               </div>
-                              <p class="card_numer">**** **** **** {{card.number.slice(15)}}</p>
+                              <p class="card_numer card_numer_Gold fw-bold">**** **** **** {{card.number.slice(15)}}</p>
                               <div class="card__space-75">
-                                <span class="card__label">Card holder</span>
-                                <p class="card__info">{{card.cardholder}}</p>
+                                <span class="card__label card_label_Gold">Card holder</span>
+                                <p class="card__info card_info_Gold">{{card.cardholder}}</p>
                               </div>
                               <div class="card__space-25">
-                                <span class="card__label">Expires</span>
-                                      <p class="card__info">{{cardDate(card.thruDate.slice(2))}}</p>
+                                <span class="card__label card_label_Gold">Expires</span>
+                                      <p class="card__info card_info_Gold">{{cardDate(card.thruDate.slice(2))}}</p>
                               </div>
                             </div>
-                            <div v-else-if="card.color == 'SILVER'" class=" card__front card__part cardSilver">   
+                            <div v-else-if="card.color == 'SILVER' && card.thruDate >= currentCardDate" class=" card__front card__part cardSilver">   
                                 <div class="d-flex justify-content-between ">  
                                   <img class="card__front-square card__square" id="logo-card" src="./assets/img/Logo.PNG">
                                   <span>{{card.color}}</span>
@@ -143,13 +143,14 @@
                                         <p class="card__info">{{cardDate(card.thruDate.slice(2))}}</p>
                                 </div>
                               </div>
-                              <div v-else-if="card.color == 'TITANIUM'" class=" card__front card__part cardTitanium">   
+                              <div v-else-if="card.color == 'TITANIUM' && card.thruDate >= currentCardDate" class=" card__front card__part cardTitanium">   
                                 <div class="d-flex justify-content-between ">  
                                   <img class="card__front-square card__square" id="logo-card" src="./assets/img/Logo.PNG">
                                   <span>{{card.color}}</span>
                                   <span class="card__label">{{card.type}}</span>
                                   <img class="card__front-logo card__logo" src="./assets/img/logovisa.png">
                                 </div>
+
                                 <p class="card_numer">**** **** **** {{card.number.slice(15)}}</p>
                                 <div class="card__space-75">
                                   <span class="card__label">Card holder</span>
@@ -159,9 +160,20 @@
                                   <span class="card__label">Expires</span>
                                         <p class="card__info">{{cardDate(card.thruDate.slice(2))}}</p>
                                 </div>
+                              </div>
+                              <div v-if="card.color == 'TITANIUM' && card.thruDate < currentCardDate || card.color == 'GOLD' && card.thruDate < currentCardDate || card.color == 'SILVER' && card.thruDate < currentCardDate" class=" card__front card__part overlay">   
+                                <div class="d-flex justify-content-between ">  
+                                  <img class="card__front-square card__square" id="logo-card" src="./assets/img/Logo.PNG">
+                                  <span>{{card.color}} <h6>(expired)</h6> </span>
+                                  <span class="card__label">EXPIRED</span>
+                                  <img class="card__front-logo card__logo" src="./assets/img/logovisa.png">
+                                </div>
+                                <p class="card_numer">{{card.number}}</p>
+                                <span>EXPIRED</span>
+                                
                               </div>
                             <!-- CARD-BACK -->
-                            <div v-if="card.color == 'GOLD'" class="card__back card__part cardGold">
+                            <div v-if="card.color == 'GOLD' && card.thruDate >= currentCardDate" class="card__back card__part cardGold">
                               <div class="card__black-line"></div>
                               <div class="card__back-content">
                                 <div class="card__secret">
@@ -171,7 +183,7 @@
                                         
                               </div>
                             </div>
-                            <div v-else-if="card.color == 'SILVER'" class="card__back card__part cardSilver">
+                            <div v-else-if="card.color == 'SILVER' && card.thruDate >= currentCardDate" class="card__back card__part cardSilver">
                                 <div class="card__black-line"></div>
                                 <div class="card__back-content">
                                   <div class="card__secret">
@@ -181,7 +193,7 @@
                                           
                                 </div>
                             </div>
-                            <div v-else-if="card.color == 'TITANIUM'" class="card__back card__part cardTitanium">
+                            <div v-else-if="card.color == 'TITANIUM' && card.thruDate >= currentCardDate" class="card__back card__part cardTitanium">
                                 <div class="card__black-line"></div>
                                 <div class="card__back-content">
                                   <div class="card__secret">
@@ -191,8 +203,26 @@
                                           
                                 </div>
                             </div>
+                            <div v-else-if="card.color == 'TITANIUM' && card.thruDate < currentCardDate || card.color == 'GOLD' && card.thruDate < currentCardDate || card.color == 'SILVER' && card.thruDate < currentCardDate" class="card__back card__part overlay">
+                              <div class="card__black-line"></div>
+                              <div class="card__back-content">
+                                <div class="card__secret">
+                                  <p class="card__secret--last">{{card.cvv}}</p>
+                                </div>
+                                <p id="textBack-card">{{objectClient.firstName}} , this card is expired, please delete this card with the delete button bellow.</p>  
+                                        
+                              </div>
+                          </div>
+                          </div>
                         </div>
-                    </div>
+                        <div class="card-footer d-flex flex-column justify-content-center">
+
+                          <select v-model="number" @change="deleteCards(number)" name="" id="">
+                            <option value="" disabled selected>Select a card to delete</option>
+                            <option :value="card.number">Card: {{card.number}}</option>
+                          </select>  <!-- hasta aqui el account.number si me captura el numero de tarjeta -->
+                          <button type="submit" @click="deleteCards(number)">Delete this card.</button>                         
+                        </div>
                     
                   </div>
                   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -253,7 +283,7 @@
                       <div class="collapse navbar-collapse justify-content-end" id="collapsable-btn-credit" >
                         <ul class="navbar-nav" >
                           <li v-for="card of cards"  class="nav-item">
-                                <a title="click here!" v-if="card.type === 'CREDIT'" class="nav-link collapsable-link">{{card.type}} {{card.color}} (See more transactions)</a>
+                                <a title="click here!" v-if="card.type === 'CREDIT' && card.thruDate >= currentCardDate" class="nav-link collapsable-link">{{card.type}} {{card.color}} (See more transactions)</a>
                           </li>
                         </ul>
                       </div>
@@ -271,7 +301,7 @@
                       <div class="collapse navbar-collapse justify-content-end" id="collapsable-btn-debit" >
                         <ul class="navbar-nav" >
                           <li v-for="card of cards"  class="nav-item">
-                                <a title="click here!" v-if="card.type === 'DEBIT'" class="nav-link collapsable-link">{{card.type}} {{card.color}} (See more transactions)</a>
+                                <a title="click here!" v-if="card.type === 'DEBIT' && card.thruDate >= currentCardDate" class="nav-link collapsable-link">{{card.type}} {{card.color}} (See more transactions)</a>
                           </li>
                         </ul>
                       </div>
@@ -498,6 +528,7 @@
     <script>
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="mssg"]')
       const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-    </script>
+    </script> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

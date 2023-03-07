@@ -11,7 +11,7 @@ public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    private long id;
+    private Long id;
     private String cardholder;
     private CardType type;
     private CardColor color;
@@ -25,18 +25,18 @@ public class Card {
 
     public Card(){};
 
-    public Card(CardType type, CardColor color, Client client, String cvv, String number) {
+    public Card(CardType type, CardColor color, Client client, String cvv, String number, LocalDate fromDate, LocalDate thruDate) {
         this.type = type;
         this.color = color;
         this.cardholder = client.getFirstName() + " " + client.getLastName() ; //nombre concat
         this.number = number ; //metodo de numero16 mas no repeticion
         this.cvv = cvv ; //3 numeros
-        this.fromDate = fromDate.now() ;
-        this.thruDate = this.fromDate.plusYears(5) ; //5años despues
+        this.fromDate = fromDate;
+        this.thruDate = thruDate;
         this.client = client;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

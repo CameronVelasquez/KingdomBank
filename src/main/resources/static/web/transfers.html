@@ -56,7 +56,7 @@
               </div>              
               <form class=" d-flex flex-column gap-3">
                 <input v-if="transferenceTo == 'Another person account'" v-model="destinyAccount" type="text" placeholder="Write destiny account number" />
-                <input  v-model="amount" type="text" placeholder="Amount to transfer in USD"/>                
+                <input  v-model="amount" type="number" min="0" placeholder="Amount to transfer in USD"/>           
                 <textarea style="resize: none;" v-model="description" placeholder="Write a short description for the receiver" name="" id="" cols="30" rows="5"></textarea>
              </form>
             </div>

@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 public class CardDTO {
-    private long id;
+    private Long id;
     private String cardholder;
     private CardType type;
     private CardColor color;
@@ -36,7 +36,7 @@ public class CardDTO {
 
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
     public String getCardholder() {

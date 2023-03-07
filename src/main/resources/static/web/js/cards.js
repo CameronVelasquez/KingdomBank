@@ -9,14 +9,14 @@ createApp({
             loans: [],
             cards: [],
             transactionId: "",
+            currentCardDate: undefined,          
         }
 
 	},
 	created(){
-        this.loadData()
-        
+        this.loadData(),
+        this.currentDate()
 	},
-
     methods: {
         loadData (){
             axios.get("http://localhost:8080/api/clients/current")
@@ -42,7 +42,21 @@ createApp({
                 location.href = "/web/index.html"
             })
             .catch(error => console.log(error))
+        },
+        /* Delete Cards */
+        numberData(){
+            console.log(this.number) 
+        },
+        
+        /* Expired Cards */
+        currentDate(){
+            let date = new Date().toLocaleDateString()
+            let day = date.split('-')[0]
+            let month = date.split('-')[1]
+            let year = date.split('-')[2]
+            return this.currentCardDate = year + '-' + month + '-' + day
         }
+        
         
     }
 	

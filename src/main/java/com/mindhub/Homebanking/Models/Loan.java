@@ -15,7 +15,7 @@ public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    private long id;
+    private Long id;
 
     private String name;
     private double maxAmount;
@@ -33,7 +33,7 @@ public class Loan {
         this.payments = payments;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -67,12 +67,11 @@ public class Loan {
     public void setClientLoans(Set<ClientLoan> clientLoans) {
         this.clientLoans = clientLoans;
     }
-    public void addLoans(ClientLoan client) {
-        client.setLoan(this);
-        clientLoans.add(client);
+    public void addLoans(ClientLoan clientLoan) {
+        clientLoan.setLoan(this);
+        clientLoans.add(clientLoan);
     }
-    @JsonIgnore
-    public List<Client> getClients() {
-        return clientLoans.stream().map(ClientLoan::getClient).collect(Collectors.toList());
+    public Set<Client> getClients() {
+        return clientLoans.stream().map(ClientLoan::getClient).collect(Collectors.toSet());
     }
 }

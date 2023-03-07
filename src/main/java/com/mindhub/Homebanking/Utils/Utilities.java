@@ -33,26 +33,7 @@ public class Utilities {
             return generatedNumber;
         }
     }
-//    public static String randomNumberCard(CardRepository cardRepository){
-//        String codString;
-//        Boolean cardOptional;
-//        do {
-//            codString= randomString();
-//            cardOptional= cardRepository.existsCardByNumber(codString);
-//        }while(cardOptional);
-//        return codString;
-//    }
 
-//    public static String randomString(){
-//        int number1_1 = (int) (Math.random() * (5- 4)+4);
-//        int number1 = (int) (Math.random() * (999 - 100 ) + 100);
-//        int number2 = (int) (Math.random() * (9999 - 1000) + 1000);
-//        int number3 = (int) (Math.random() * (9999 - 1000) + 1000);
-//        int number4 = (int) (Math.random() * (9999 - 1000) + 1000);
-//        String number = number1_1+""+number1+"-"+number2+"-"+number3+"-"+number4;
-//
-//        return number;
-//    }
     public static String GenerateNumber(){
         int number1=(int) (Math.random() * (99999999));
         String number = "VIN-"+number1;//VIN-46877988
@@ -68,5 +49,9 @@ public class Utilities {
         } while (verifyNumber);
 
         return Number;
+    }
+    public static Double loanFees(Double amount){
+        Double amountPlusFees = amount * 0.2 + amount;
+        return amountPlusFees;
     }
 }

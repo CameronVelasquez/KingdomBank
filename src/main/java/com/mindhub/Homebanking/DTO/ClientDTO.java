@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ClientDTO {
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -48,7 +48,7 @@ public class ClientDTO {
         return email;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
