@@ -2,6 +2,7 @@ package com.mindhub.Homebanking.Controllers;
 
 import com.mindhub.Homebanking.DTO.ClientDTO;
 import com.mindhub.Homebanking.Models.Account;
+import com.mindhub.Homebanking.Models.Card;
 import com.mindhub.Homebanking.Models.Client;
 import com.mindhub.Homebanking.Repositories.AccountRepository;
 import com.mindhub.Homebanking.Repositories.ClientRepository;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.mindhub.Homebanking.Utils.Utilities.accountNumber;
 import static com.mindhub.Homebanking.Utils.Utilities.randomNumberCard;
@@ -74,7 +77,10 @@ public class ClientController {
     @RequestMapping("/api/clients/current")
     public ClientDTO getCurrentClient(Authentication authentication){
         String email = authentication.getName();
-        return new ClientDTO(repoClient.findByEmail(email));
+        Client client = repoClient.findByEmail(email);
+        Set<Card> visibleCards = client.getCards().stream().filter(card -> card.getShowCard() == true).collect(Collectors.toSet());
+        client.setCards(visibleCards);
+        return new ClientDTO(client);
     }
 
 }

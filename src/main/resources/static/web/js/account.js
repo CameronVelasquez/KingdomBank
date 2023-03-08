@@ -42,14 +42,23 @@ createApp({
         hour (data){
             let justHour = data.split("T")[1]
             return justHour.substr(0, 8)
-            },
-            logOut(){
-            axios.post("/api/logout")
-            .then( response => {
-                location.href = "/web/index.html"
-            })
-            .catch(error => console.log(error))
-        }
+        },
+        logOut(){
+                axios.post("/api/logout")
+                .then( response => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: `Successfully Log out!`, 
+                        text: `${response.status}: OK`,
+                        showConfirmButton: false,
+                        timer: 2000,
+                    })
+                    .then(response => {
+                        location.href = "/web/index.html"
+                    })
+                })
+                .catch(error => console.log(error))
+            }
         
         }
         

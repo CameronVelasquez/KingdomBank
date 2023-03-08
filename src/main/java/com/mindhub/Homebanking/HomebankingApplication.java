@@ -46,8 +46,8 @@ public class HomebankingApplication {
 			//Transacciones account1
 			Transaction transaction1 = new Transaction(TransactionType.CREDIT, 2500.00, "transfered from bank account", yesterday.minusHours(1) );
 			Transaction transaction2 = new Transaction(TransactionType.CREDIT, 1500.00, "transfered from bank account", yesterday );
-			Transaction transaction3 = new Transaction(TransactionType.DEBIT, 20.00, "transfered to another bank account", now.minusHours(10) );
-			Transaction transaction4 = new Transaction(TransactionType.DEBIT, 10.50, "transfered to another bank account", lastMonth );
+			Transaction transaction3 = new Transaction(TransactionType.DEBIT, 20.00, "transfered to another bank account", now.minusHours(10));
+			Transaction transaction4 = new Transaction(TransactionType.DEBIT, 10.50, "transfered to another bank account", lastMonth);
 			Transaction transaction5 = new Transaction(TransactionType.CREDIT, 1000.00, "transfered from bank account", now.minusHours(5) );
 
 			account1.addTransaction(transaction1);
@@ -110,12 +110,12 @@ public class HomebankingApplication {
 			ClientLoan Loan4 = new ClientLoan(200000.00, 32, Cameron, automotive);
 
 			//Cards for Melba
-			Card card1 = new Card(CardType.DEBIT, CardColor.GOLD, Melba, cvv(),randomString(), LocalDate.now(), LocalDate.now().plusYears(5));
-			Card card2 = new Card(CardType.CREDIT, CardColor.TITANIUM, Melba, cvv(), randomNumberCard(cardRepository), LocalDate.now(), LocalDate.now().plusYears(5) );
-			Card cardSample = new Card(CardType.CREDIT, CardColor.SILVER, Melba, cvv(), randomNumberCard(cardRepository), LocalDate.now().minusYears(5), LocalDate.now().minusDays(1));
+			Card card1 = new Card(CardType.DEBIT, CardColor.GOLD, Melba, cvv(),randomString(), LocalDate.now(), LocalDate.now().plusYears(5), true);
+			Card card2 = new Card(CardType.CREDIT, CardColor.TITANIUM, Melba, cvv(), randomNumberCard(cardRepository), LocalDate.now(), LocalDate.now().plusYears(5),true );
+			Card cardSample = new Card(CardType.CREDIT, CardColor.SILVER, Melba, cvv(), randomNumberCard(cardRepository), LocalDate.now().minusYears(5), LocalDate.now().minusDays(1), true);
 
 			//Cards Client2
-			Card card3 = new Card(CardType.CREDIT, CardColor.SILVER, Cameron, cvv(), randomNumberCard(cardRepository), LocalDate.now(), LocalDate.now().plusYears(5));
+			Card card3 = new Card(CardType.CREDIT, CardColor.SILVER, Cameron, cvv(), randomNumberCard(cardRepository), LocalDate.now(), LocalDate.now().plusYears(5), true);
 
 			//Melba.addCard(card1);
 			//Melba.addCard(card2);

@@ -36,8 +36,16 @@ createApp({
         logOut(){
             axios.post("/api/logout")
             .then( response => {
-                location.href = "/web/index.html"
-                
+                Swal.fire({
+                    icon: 'success',
+                    title: `Successfully Log out!`, 
+                    text: `${response.status}: OK`,
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+                .then(response => {
+                    location.href = "/web/index.html"
+                })
             })
             .catch(error => console.log(error))
         },

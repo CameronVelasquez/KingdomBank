@@ -36,10 +36,10 @@ public class CardController {
 
         if (authenticatedClient.getCards().size() >= 6){
             return new ResponseEntity<> ("You cannot create more Cards", HttpStatus.FORBIDDEN);}
-        if (authenticatedClient.getCards().stream().anyMatch(card -> type == card.getType() && color == card.getColor()) ){
+        if (authenticatedClient.getCards().stream().anyMatch(card -> type == card.getType() && color == card.getColor() && card.getShowCard() == true) ){
             return new ResponseEntity<>("Already have this card category", HttpStatus.FORBIDDEN);}
 
-         Card addNewCard = new Card(type, color, authenticatedClient, cvv(), randomNumberCard(cardRepository), LocalDate.now(), LocalDate.now().plusYears(5));
+         Card addNewCard = new Card(type, color, authenticatedClient, cvv(), randomNumberCard(cardRepository), LocalDate.now(), LocalDate.now().plusYears(5), true);
          cardRepository.save(addNewCard);
 
         return new  ResponseEntity<>("New card created", HttpStatus.CREATED);
@@ -48,11 +48,12 @@ public class CardController {
     @RequestMapping("/api/clients/current/cards")
     public List<CardDTO> getCurrentCards(Authentication authentication){
         Client client = clientRepository.findByEmail(authentication.getName());
-        return client.getCards().stream().map(account -> new CardDTO(account)).collect(toList());
+        List<Card> visibleCards = client.getCards().stream().filter(card -> card.getShowCard() == true).collect(Collectors.toList());
+        return visibleCards.stream().map(account -> new CardDTO(account)).collect(toList());
     }
 
     //EXTRAS: Delete cards
-    @RequestMapping(path = "/api/clients/current/cards", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/api/clients/current/cards", method = RequestMethod.PATCH)
     public ResponseEntity<Object> deleteCards (Authentication authentication, @RequestParam String number){
 
         Client authenticatedClient = clientRepository.findByEmail(authentication.getName());
@@ -75,7 +76,8 @@ public class CardController {
 
 
 
-        cardRepository.deleteById(getCardToDelete.getId());
+        getCardToDelete.setShowCard(false);
+        cardRepository.save(getCardToDelete);
 
         return new ResponseEntity<>("Card successfully deleted!", HttpStatus.OK);
     }
