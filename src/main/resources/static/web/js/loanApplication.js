@@ -12,7 +12,9 @@ createApp({
             paymentSelected: undefined,
             accountNumber: "",
             loanSelected: {},
-            listOfPayments: {}
+            listOfPayments: {},
+            fee: undefined,
+            currentIndex: {}
            
             
         }
@@ -21,6 +23,7 @@ createApp({
 	created(){
         this.loadDataClx(),
         this.loadDataLoans()
+        
         
 	},
 
@@ -37,8 +40,10 @@ createApp({
         },
         changed(){
             this.loanSelected = this.loans.filter(loan => loan.id == this.loanId)
+            this.fee = this.loanSelected[0].fee
             this.listOfPayments = this.loanSelected[0].payments
-            
+            this.listOfFees = this.loanSelected[0].paymentsFees      
+            this.currentIndex = this.listOfPayments.indexOf(this.paymentSelected)
         },
         loadDataLoans(){
             axios.get("/api/loans")
@@ -90,10 +95,19 @@ createApp({
             })
         },
         monthlyPayments(){
-            let amountWithFees = this.amountSelected * 0.2 + this.amountSelected
-            let monthlyPayment = (amountWithFees / this.paymentSelected).toLocaleString('de-DE', { style: 'currency', currency: 'USD' })
+            let feeCharge = this.listOfFees[this.currentIndex]
+            let amountWithFees = this.amountSelected * this.fee
+            let monthlyPayment = (amountWithFees / this.paymentSelected * feeCharge).toLocaleString('de-DE', { style: 'currency', currency: 'USD' })
             return monthlyPayment
-        }
+        },
+        feePercentage(data){
+            let amount = (data - 1) * 100
+            return Math.round(amount) 
+        },
+        paymentsFee(payment){
+            let percentage = (this.listOfFees[this.listOfPayments.indexOf(payment)] - 1) * 100 
+            return "%" + Math.round(percentage)
+        } 
         
     }
 	

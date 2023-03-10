@@ -9,7 +9,9 @@ createApp({
             loans: [],
             type: '',
             color: '',
-            transactionId: undefined
+            transactionId: undefined,
+            accountNumber: undefined,
+            destinyAccount: undefined
         }
 
 	},
@@ -63,6 +65,51 @@ createApp({
                     this.loadData()
                 })
                 
+            })
+        },
+        deleteAccounts(){
+            axios.patch("/api/clients/current/accounts", `accountNumber=${this.accountNumber}&accountDestiny=${this.destinyAccount}`, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+                })
+            .then(response => {
+                Swal.fire({
+                    icon: 'success',
+                    title: `${response.data}`, 
+                    text: `${response.status}: OK`,
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+                .then(response => {
+                    window.location.href = '/web/accounts.html'; this.loadData()
+                })
+            })
+            .catch(error => {
+                console.log(error)
+                Swal.fire({
+                    icon: 'error',
+                    title: `${error.response.data}`, 
+                    text: `${error.code}: ${error.response.status}`,
+                    confirmButtonColor: '#FF4B2B',
+      
+                })
+
+            })
+        },
+        alertDeleteAccount(){
+            Swal.fire({
+                title: 'Are you sure you want to delete this account?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#FF4B2B',
+                confirmButtonText: 'Confirm'
+            }).then((response) => {
+                if (response.isConfirmed) {
+                    this.deleteAccounts();
+            }
             })
         }
         

@@ -149,7 +149,40 @@
                           <div class="card-body ">
                             <h5 class="card-title fw-bold">{{account.balance.toFixed(2)}} USD</h5>
                             <p class="card-text">{{objectClient.firstName}}, the current balance on this account is: ${{account.balance.toFixed(2)}} USD. To see all your transactions click below.</p>
-                            <a :href='"./account.html?id="+account.id' class="btn overlay">Check account</a>
+                            <div>
+                              <a :href='"./account.html?id="+account.id' class="btn overlay">Check account</a>
+                              <button v-if="accounts.length >= 2" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Account</button>
+                              <!-- MODAL -->
+                              <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Your Account.</h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body d-flex flex-column gap-5">
+                                      <section>
+                                        <h6>Select the account to delete</h6>
+                                      <select v-model="accountNumber" name="account to delete" id="accountNumber">
+                                        <option value="" disable selected>select an option</option>
+                                        <option v-for="account of accounts" :value="account.number">{{account.number}}</option>
+                                      </select>
+                                      </section>
+                                      <section>
+                                        <h6>Select Account to transfer</h6>
+                                      <select v-model="destinyAccount" name="destiny account" id="destinyAccount">
+                                        <option value="" disable selected>select an option</option>
+                                        <option v-for="account of accounts" :value="account.number">{{account.number}}</option>
+                                      </select>
+                                      </section>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button @click="alertDeleteAccount" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Proceed to Delete</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                             <hr>
                           
                             <div class="last-transactions">

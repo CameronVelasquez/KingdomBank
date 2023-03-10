@@ -1,7 +1,12 @@
 package com.mindhub.Homebanking.Utils;
 
+import com.mindhub.Homebanking.Models.Account;
+import com.mindhub.Homebanking.Models.Loan;
 import com.mindhub.Homebanking.Repositories.AccountRepository;
 import com.mindhub.Homebanking.Repositories.CardRepository;
+import com.mindhub.Homebanking.Repositories.LoanRepository;
+
+import java.util.List;
 
 public class Utilities {
     //preguntar mas tarde a Fede sobre el cardRepository
@@ -50,8 +55,21 @@ public class Utilities {
 
         return Number;
     }
-    public static Double loanFees(Double amount){
-        Double amountPlusFees = amount * 0.2 + amount;
+    public static Double loanFees(Double amount, Loan loan){
+        Double fee = loan.getFee();
+        Double amountPlusFees = amount * fee;
         return amountPlusFees;
+    }
+    public static Double currentBalanceCredit(AccountRepository accountRepository, Account account, double amount){
+        Double getCurrentAmount = accountRepository.findByNumber(account.getNumber()).getBalance() + amount;
+
+        return getCurrentAmount;
+
+    }
+    public static Double currentBalanceDebit(AccountRepository accountRepository, Account account, double amount){
+        Double getCurrentAmount = accountRepository.findByNumber(account.getNumber()).getBalance() - amount;
+
+        return getCurrentAmount;
+
     }
 }

@@ -17,17 +17,20 @@ public class Transaction {
     private String description;
     private LocalDateTime date;
     private double currentBalance;
+    private Double showCurrentBalance;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="account_id")
     private Account account;
 
 
     public Transaction(){}
-    public Transaction(TransactionType type, double amount, String description, LocalDateTime date) {
+    public Transaction(TransactionType type, double amount, String description, LocalDateTime date, Double showCurrentBalance) {
         this.type = type;
         this.amount = amount;
         this.description = description;
         this.date = date;
+        this.showCurrentBalance = showCurrentBalance;
     }
 
     public Long getId() {
@@ -80,5 +83,13 @@ public class Transaction {
 
     public void setCurrentBalance(double currentBalance) {
         this.currentBalance = currentBalance;
+    }
+
+    public Double getShowCurrentBalance() {
+        return showCurrentBalance;
+    }
+
+    public void setShowCurrentBalance(Double showCurrentBalance) {
+        this.showCurrentBalance = showCurrentBalance;
     }
 }

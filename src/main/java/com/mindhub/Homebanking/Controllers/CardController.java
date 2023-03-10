@@ -49,7 +49,7 @@ public class CardController {
     public List<CardDTO> getCurrentCards(Authentication authentication){
         Client client = clientRepository.findByEmail(authentication.getName());
         List<Card> visibleCards = client.getCards().stream().filter(card -> card.getShowCard() == true).collect(Collectors.toList());
-        return visibleCards.stream().map(account -> new CardDTO(account)).collect(toList());
+        return visibleCards.stream().map(card -> new CardDTO(card)).collect(toList());
     }
 
     //EXTRAS: Delete cards
@@ -73,12 +73,14 @@ public class CardController {
                 return new  ResponseEntity<>("You must select Date of Creation option", HttpStatus.BAD_REQUEST);}
             if( getCardToDelete.getThruDate().toString().isEmpty()){
                 return new  ResponseEntity<>("You must select Date of Expiration option", HttpStatus.BAD_REQUEST);}
+            if(getCardToDelete.getShowCard() == false){
+                return new ResponseEntity<>("You can't delete this card", HttpStatus.BAD_REQUEST);}
 
 
 
         getCardToDelete.setShowCard(false);
         cardRepository.save(getCardToDelete);
 
-        return new ResponseEntity<>("Card successfully deleted!", HttpStatus.OK);
+        return new ResponseEntity<>("Card successfully deleted!", HttpStatus.ACCEPTED);
     }
 }

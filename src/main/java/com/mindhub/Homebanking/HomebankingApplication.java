@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import static com.mindhub.Homebanking.Utils.Utilities.*;
 
@@ -37,18 +38,18 @@ public class HomebankingApplication {
 			Client Cameron = new Client("Cameron", "Velasquez", "cameronlino@outlook.com", passwordEncoder.encode("564Cam"));
 			Client Admin = new Client("Admin", "Admin", "admin@mindhub.com", passwordEncoder.encode("000000"));
 
-			Account account1 = new Account("VIN001", now, 5000.00);
-			Account account2 = new Account( "VIN002", nextDay, 7500.00);
-			Account account3 = new Account( "VIN003", nextDay, 7500.00);
+			Account account1 = new Account("VIN001", now, 5000.00, true);
+			Account account2 = new Account( "VIN002", nextDay, 7500.00, true);
+			Account account3 = new Account( "VIN003", nextDay, 7500.00, true);
 
 
 
 			//Transacciones account1
-			Transaction transaction1 = new Transaction(TransactionType.CREDIT, 2500.00, "transfered from bank account", yesterday.minusHours(1) );
-			Transaction transaction2 = new Transaction(TransactionType.CREDIT, 1500.00, "transfered from bank account", yesterday );
-			Transaction transaction3 = new Transaction(TransactionType.DEBIT, 20.00, "transfered to another bank account", now.minusHours(10));
-			Transaction transaction4 = new Transaction(TransactionType.DEBIT, 10.50, "transfered to another bank account", lastMonth);
-			Transaction transaction5 = new Transaction(TransactionType.CREDIT, 1000.00, "transfered from bank account", now.minusHours(5) );
+			Transaction transaction1 = new Transaction(TransactionType.CREDIT, 1.00, "transfered from bank account", now.minusDays(10), 1.0 );
+			Transaction transaction2 = new Transaction(TransactionType.CREDIT, 0.00, "transfered from bank account", now.minusDays(9) , 1.0);
+			Transaction transaction3 = new Transaction(TransactionType.DEBIT, 1.00, "transfered to another bank account", now.minusDays(8), 0.0 );
+			Transaction transaction4 = new Transaction(TransactionType.DEBIT, 0.00, "transfered to another bank account", now.minusDays(7), 0.0 );
+			Transaction transaction5 = new Transaction(TransactionType.CREDIT, 1.00, "transfered from bank account", now.minusDays(6), 1.0  );
 
 			account1.addTransaction(transaction1);
 			account1.addTransaction(transaction2);
@@ -57,11 +58,11 @@ public class HomebankingApplication {
 			account1.addTransaction(transaction5);
 
 			//Transacciones account2
-			Transaction transaction6 = new Transaction(TransactionType.DEBIT, 85.00, "transfered to another bank account", now );
-			Transaction transaction7 = new Transaction(TransactionType.DEBIT, 24.50, "transfered to another bank account", now );
-			Transaction transaction8 = new Transaction(TransactionType.CREDIT, 7500.00, "transfered from bank account", lastMonth.minusHours(10) );
-			Transaction transaction9 = new Transaction(TransactionType.DEBIT, 14.00, "transfered to another bank account", lastTwoMonths.minusHours(5) );
-			Transaction transaction10 = new Transaction(TransactionType.DEBIT, 5.00, "transfered to another bank account", lastTwoMonths.minusHours(2) );
+			Transaction transaction6 = new Transaction(TransactionType.DEBIT, 4000.00, "transfered to another bank account", now.minusHours(10), 4000.0  );
+			Transaction transaction7 = new Transaction(TransactionType.DEBIT, 1000.00, "transfered to another bank account", now.minusHours(9) , 3000.0 );
+			Transaction transaction8 = new Transaction(TransactionType.CREDIT, 3000.00, "transfered from bank account", now.minusHours(8) , 6000.0 );
+			Transaction transaction9 = new Transaction(TransactionType.DEBIT, 500.00, "transfered to another bank account", now.minusHours(7), 5500.0 );
+			Transaction transaction10 = new Transaction(TransactionType.DEBIT, 500.00, "transfered to another bank account", now.minusHours(6) , 5000.0 );
 
 			account2.addTransaction(transaction6);
 			account2.addTransaction(transaction7);
@@ -70,11 +71,11 @@ public class HomebankingApplication {
 			account2.addTransaction(transaction10);
 
 			//Transacciones account 1
-			Transaction transaction11 = new Transaction(TransactionType.CREDIT, 2000.00,"Sale of jacket",LocalDateTime.now());
-			Transaction transaction12 = new Transaction(TransactionType.CREDIT, 1500.00,"Sale of footwear",LocalDateTime.now());
-			Transaction transaction13 = new Transaction(TransactionType.CREDIT, 3000.00,"Sale of jeweler's",LocalDateTime.now());
-			Transaction transaction14 = new Transaction(TransactionType.DEBIT, 1000.00,"Purchase of papers",LocalDateTime.now());
-			Transaction transaction15 = new Transaction(TransactionType.DEBIT, 500.21,"Purchase of snacks",LocalDateTime.now());
+			Transaction transaction11 = new Transaction(TransactionType.CREDIT, 0.00,"Sale of jacket",LocalDateTime.now().minusDays(5), 1.0 );
+			Transaction transaction12 = new Transaction(TransactionType.CREDIT, 0.00,"Sale of footwear",LocalDateTime.now().minusDays(4), 1.0 );
+			Transaction transaction13 = new Transaction(TransactionType.CREDIT, 0.00,"Sale of jeweler's",LocalDateTime.now().minusDays(3), 1.0 );
+			Transaction transaction14 = new Transaction(TransactionType.DEBIT, 1.00,"Purchase of papers",LocalDateTime.now().minusDays(2), 0.0 );
+			Transaction transaction15 = new Transaction(TransactionType.CREDIT, 5000.00,"Patreon",LocalDateTime.now(), 5000.0);
 
 			account1.addTransaction(transaction11);
 			account1.addTransaction(transaction12);
@@ -83,11 +84,11 @@ public class HomebankingApplication {
 			account1.addTransaction(transaction15);
 
             //Transacciones account 2
-			Transaction transaction16 = new Transaction(TransactionType.CREDIT, 7000.00,"Sale of jacket",LocalDateTime.now().minusHours(10));
-			Transaction transaction17 = new Transaction(TransactionType.CREDIT, 8500.00,"Sale of footwear",LocalDateTime.now());
-			Transaction transaction18 = new Transaction(TransactionType.DEBIT, 2500.00,"Purchase of keyboard",LocalDateTime.now());
-			Transaction transaction19 = new Transaction(TransactionType.DEBIT, 3500.00,"Purchase of microphone",LocalDateTime.now());
-			Transaction transaction20 = new Transaction(TransactionType.DEBIT, 2500.00,"Purchase of mouse",LocalDateTime.now());
+			Transaction transaction16 = new Transaction(TransactionType.CREDIT, 500.99,"Sale of jacket",LocalDateTime.now().minusHours(5), 5500.0 );
+			Transaction transaction17 = new Transaction(TransactionType.CREDIT, 4000.99,"Sale of footwear",LocalDateTime.now().minusHours(4), 9500.0 );
+			Transaction transaction18 = new Transaction(TransactionType.DEBIT, 500.00,"Purchase of keyboard",LocalDateTime.now().minusHours(3), 9000.0 );
+			Transaction transaction19 = new Transaction(TransactionType.DEBIT, 1000.00,"Purchase of microphone",LocalDateTime.now().minusHours(2), 8000.0 );
+			Transaction transaction20 = new Transaction(TransactionType.DEBIT, 500.00,"Purchase of mouse",LocalDateTime.now().minusHours(1),7500.0  );
 
 			account2.addTransaction(transaction16);
 			account2.addTransaction(transaction17);
@@ -100,9 +101,9 @@ public class HomebankingApplication {
 			Cameron.addAccount(account3);
 
 			//Loans
-			Loan mortgage = new Loan( "Mortgage", 500000.00, List.of(12,24,36,48,60));
-			Loan personal = new Loan("Personal", 100000.00, List.of(6,12,24));
-			Loan automotive = new Loan("Automotive", 300000.00, List.of(6,12,24,36));
+			Loan mortgage = new Loan( "Mortgage", 500000.00, List.of(12,24,36,48,60), 1.10, List.of(1.0,1.05,1.1,1.15,1.2));
+			Loan personal = new Loan("Personal", 100000.00, List.of(6,12,24), 1.2, List.of(1.0, 1.05, 1.1));
+			Loan automotive = new Loan("Automotive", 300000.00, List.of(6,12,24,36), 1.15, List.of(1.0,1.05,1.1,1.15));
 
 			ClientLoan Loan1 = new ClientLoan(400000.00, 60, Melba, mortgage);
 			ClientLoan Loan2 = new ClientLoan(50000.00, 12, Melba, personal);

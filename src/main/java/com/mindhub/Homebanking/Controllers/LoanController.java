@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.mindhub.Homebanking.Utils.Utilities.currentBalanceCredit;
 import static com.mindhub.Homebanking.Utils.Utilities.loanFees;
 
 @RestController
@@ -72,8 +73,8 @@ public class LoanController {
 
 
 
-        ClientLoan newClientLoan = new ClientLoan( loanFees(amount), payments, authenticatedClient, selectedLoan);
-        Transaction newTransaction = new Transaction(TransactionType.CREDIT, amount, selectedLoan.getName().toUpperCase() + ": Loan approved", LocalDateTime.now());
+        ClientLoan newClientLoan = new ClientLoan( loanFees(amount, selectedLoan), payments, authenticatedClient, selectedLoan);
+        Transaction newTransaction = new Transaction(TransactionType.CREDIT, amount, selectedLoan.getName().toUpperCase() + ": Loan approved", LocalDateTime.now(), currentBalanceCredit(accountRepository, selectedAccount, amount));
 
         selectedLoan.addLoans(newClientLoan);
         selectedAccount.addTransaction(newTransaction);

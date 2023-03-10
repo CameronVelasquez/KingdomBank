@@ -278,12 +278,17 @@ border-radius: 4px;
     color: var(--w-complement) !important;
     text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.6) !important;
 }
+.fee{
+  font-size: 10x !important;
+  color: var(--r-contrast) !important;
+}
 
 /* Mediaqueries */
 @media(max-width:328px){
   .monthlyPayment{
-    font-size: 15px !important;
+    font-size: 15px;
   }
+  
 }
 @media(min-width:320px) and (max-width:900px){
     #cardTemplate{

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 
+import static com.mindhub.Homebanking.Utils.Utilities.*;
+
 @RestController
 public class TransactionController {
     @Autowired
@@ -69,8 +71,8 @@ public class TransactionController {
         else if(originAccount.getBalance() < amount){
             return new ResponseEntity<>("You don't have enough funds", HttpStatus.FORBIDDEN);
         }
-        Transaction transactionDebit = new Transaction(TransactionType.DEBIT,  amount, description, LocalDateTime.now());
-        Transaction transactionCredit = new Transaction(TransactionType.CREDIT,  amount, description, LocalDateTime.now());
+        Transaction transactionDebit = new Transaction(TransactionType.DEBIT,  amount, description, LocalDateTime.now(), currentBalanceDebit(accountRepository, originAccount, amount ));
+        Transaction transactionCredit = new Transaction(TransactionType.CREDIT,  amount, description, LocalDateTime.now(), currentBalanceCredit(accountRepository, destiniAccount, amount) );
         originAccount.addTransaction(transactionDebit);
         destiniAccount.addTransaction(transactionCredit);
         transactionRepository.save(transactionDebit);

@@ -98,6 +98,7 @@
                   <th scope="col">Description</th>
                   <th scope="col">Day</th>
                   <th scope="col">Hour</th>
+                  <th scope="col">Current Balance</th>
                 </tr>
               </thead>
               <tbody>
@@ -109,6 +110,7 @@
                   <td>{{transaction.description}}</td>
                   <td>{{justDay(transaction.date)}}</td>
                   <td>{{hour(transaction.date)}}</td>
+                  <td>{{transaction.showCurrentBalance}}</td>
                 </tr>
               </tbody>
             </table>

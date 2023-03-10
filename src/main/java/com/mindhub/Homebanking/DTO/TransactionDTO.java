@@ -11,7 +11,7 @@ public class TransactionDTO {
     private double amount;
     private String description;
     private LocalDateTime date;
-    private double currentBalance;
+    private Double showCurrentBalance;
     public TransactionDTO(){}
 
     public TransactionDTO(Transaction transaction) {
@@ -20,7 +20,7 @@ public class TransactionDTO {
         this.amount = transaction.getAmount();
         this.description = transaction.getDescription();
         this.date = transaction.getDate();
-        this.currentBalance = transaction.getCurrentBalance();
+        this.showCurrentBalance = transaction.getShowCurrentBalance();
     }
 
     public Long getId() {
@@ -41,5 +41,9 @@ public class TransactionDTO {
 
     public LocalDateTime getDate() {
         return date;
+    }
+
+    public Double getShowCurrentBalance() {
+        return showCurrentBalance;
     }
 }
