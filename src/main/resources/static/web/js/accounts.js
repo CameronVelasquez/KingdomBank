@@ -11,7 +11,8 @@ createApp({
             color: '',
             transactionId: undefined,
             accountNumber: undefined,
-            destinyAccount: undefined
+            destinyAccount: undefined,
+            accountType: "",
         }
 
 	},
@@ -52,7 +53,7 @@ createApp({
             .catch(error => console.log(error))
         },
         createAccounts(){
-            axios.post("/api/clients/current/accounts")
+            axios.post("/api/clients/current/accounts", `accountType=${this.accountType}`)
             .then( response => {   
                 Swal.fire({
                     icon: 'success',
@@ -63,6 +64,7 @@ createApp({
                 })
                 .then( response => {
                     this.loadData()
+                    location.href = "/web/accounts.html"
                 })
                 
             })

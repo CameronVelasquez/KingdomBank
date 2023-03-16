@@ -3,10 +3,7 @@ package com.mindhub.Homebanking.Controllers;
 import com.mindhub.Homebanking.DTO.AccountDTO;
 import com.mindhub.Homebanking.DTO.CardDTO;
 import com.mindhub.Homebanking.DTO.ClientDTO;
-import com.mindhub.Homebanking.Models.Account;
-import com.mindhub.Homebanking.Models.Card;
-import com.mindhub.Homebanking.Models.Client;
-import com.mindhub.Homebanking.Models.Transaction;
+import com.mindhub.Homebanking.Models.*;
 import com.mindhub.Homebanking.Repositories.AccountRepository;
 import com.mindhub.Homebanking.Repositories.CardRepository;
 import com.mindhub.Homebanking.Repositories.ClientRepository;
@@ -42,15 +39,17 @@ public class AccountController {
         return new AccountDTO(accountRepository.findById(id).orElse(null));
     }
     @RequestMapping(path = "/api/clients/current/accounts", method = RequestMethod.POST)
-    public ResponseEntity<Object> createAccounts (Authentication authentication){
+    public ResponseEntity<Object> createAccounts (Authentication authentication, @RequestParam (required = false) AccountType accountType){
 
         Client clientAuthenticated = clientRepository.findByEmail(authentication.getName());
 
         if( clientAuthenticated.getAccounts().size() >= 3 && clientAuthenticated.getAccounts().stream().allMatch(account -> account.getShowAccount() == true)){
             return new ResponseEntity<>("No more accounts allowed", HttpStatus.FORBIDDEN);
         }
+        if (accountType == null){
+            return new ResponseEntity<>("Account type field is empty", HttpStatus.BAD_REQUEST); }
 
-        Account newAccount = new Account(accountNumber(accountRepository) ,LocalDateTime.now(), 0, true);
+        Account newAccount = new Account(accountNumber(accountRepository) ,LocalDateTime.now(), 0, true, accountType);
         clientAuthenticated.addAccount(newAccount);
         accountRepository.save(newAccount);
         return new ResponseEntity<>("Account successfully created", HttpStatus.CREATED);

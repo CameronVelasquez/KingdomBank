@@ -37,14 +37,14 @@
               <!-- second request -->
               <div v-if="transferenceTo == 'Own account'" class="mobileSelect">
                 <p class="selectTitles">origin account:</p>
-                <select v-model="originAccount" title="Open this select menu" class="form-select selectAccountwidth" aria-label="Default select example" >
+                <select @change="change()" v-model="originAccount" title="Open this select menu" class="form-select selectAccountwidth" aria-label="Default select example" >
                     <option value="" disabled selected>Select origin account</option>
-                    <option v-for="account of accounts" :value="account.number">{{account.number}}</option>
+                    <option v-for="account of accounts" :value="account.number" >{{account.number}}</option>
                 </select>
                 <p class="selectTitles">destiny account:</p>
                 <select v-model="destinyAccount" title="Open this select menu" class="form-select selectAccountwidth" aria-label="Default select example" >
                     <option value="" disabled selected>Select destiny account</option>
-                    <option v-for="account of accounts" :value="account.number">{{account.number}}</option>
+                    <option v-for="account of newAccountList" :value="account.number" >{{account.number}}</option>
                 </select>
               </div>
               <div v-if="transferenceTo == 'Another person account'" class="mobileSelect">

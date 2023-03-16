@@ -12,7 +12,8 @@ createApp({
             description: "",
             error: "",
             errorCode: "",
-            errorStatus: ""
+            errorStatus: "",
+            newAccountList: []
             
         }
 
@@ -73,6 +74,10 @@ createApp({
                     this.transfer();
             }
             })
+        },
+        change(){
+            this.newAccountList = this.accounts.filter(account => account.number != this.originAccount)
+            return this.newAccountList
         }
         
     }

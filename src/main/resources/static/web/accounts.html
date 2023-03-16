@@ -114,7 +114,28 @@
                   <a class="nav-link" href="./transfers.html">Transfer</a>
                   <hr v-if="accounts.length < 3" >
                   <div v-if="accounts.length < 3" class=" addNew ">
-                    <a @click="createAccounts"  class="btn addButton w-60">Add Account</a> 
+                    <button type="button" class="btn overlay" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Account</button> 
+                    <!-- MODAL  -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Select account type:</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body d-flex flex-column justify-content-center">
+                            <select v-model="accountType" name="accountType" id="accountType">
+                              <option value="" disabled selected>Select an Option below</option>
+                              <option value="SAVINGS">Savings Account</option>
+                              <option value="CHECKING">Checking Account</option>
+                            </select>
+                          </div>
+                          <div class="modal-footer">
+                            <button @click="createAccounts" type="button" class="btn overlay">Create Account!</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class="addNew mt-2">
                     <a class="btn addButton w-60" href="./transfers.html">Transfer money</a> 
@@ -148,6 +169,7 @@
                           </div>
                           <div class="card-body ">
                             <h5 class="card-title fw-bold">{{account.balance.toFixed(2)}} USD</h5>
+                            <p>{{account.accountType}}</p>
                             <p class="card-text">{{objectClient.firstName}}, the current balance on this account is: ${{account.balance.toFixed(2)}} USD. To see all your transactions click below.</p>
                             <div>
                               <a :href='"./account.html?id="+account.id' class="btn overlay">Check account</a>
@@ -157,7 +179,7 @@
                                 <div class="modal-dialog">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Your Account.</h1>
+                                      <h1 class="modal-title fs-5" id="deleteModalLabel">Delete Your Account.</h1>sfhsdghgh
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body d-flex flex-column gap-5">

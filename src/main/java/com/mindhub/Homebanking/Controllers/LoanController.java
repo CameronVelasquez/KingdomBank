@@ -69,6 +69,8 @@ public class LoanController {
             return new ResponseEntity<>( "the account selected doesn't exist", HttpStatus.FORBIDDEN);}
         if (!authenticatedClient.getAccounts().contains(selectedAccount)){
             return new ResponseEntity<>( "You do not posses this account number", HttpStatus.FORBIDDEN);}
+        if(authenticatedClient.getClientLoans().stream().anyMatch(clientLoan -> clientLoan.getLoan() == selectedLoan)){
+            return new ResponseEntity<>( "You are currently paying this loan", HttpStatus.BAD_REQUEST);}
 
 
 
