@@ -21,7 +21,7 @@ public class Account {
     private Boolean showAccount;
 
     private AccountType accountType;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER) //tx clx c cta
     @JoinColumn(name="client_id")
     private Client client;
     @OneToMany(mappedBy="account", fetch=FetchType.EAGER)

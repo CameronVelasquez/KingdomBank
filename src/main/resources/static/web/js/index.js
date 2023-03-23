@@ -24,7 +24,12 @@ created(){
                     }
                 })
                 .then(response => {
-                    window.location.href = '/web/accounts.html';
+                    if (this.email == "admin@mindhub.com"){
+                        window.location.href = 'manager/manager_Loans.html';
+                    }
+                    else{
+                        window.location.href = '/web/accounts.html';
+                    }
                 })
                 .catch(error => {
                     console.log(error)

@@ -44,6 +44,7 @@ createApp({
             this.listOfPayments = this.loanSelected[0].payments
             this.listOfFees = this.loanSelected[0].paymentsFees      
             this.currentIndex = this.listOfPayments.indexOf(this.paymentSelected)
+            console.log(this.listOfFees)
         },
         loadDataLoans(){
             axios.get("/api/loans")

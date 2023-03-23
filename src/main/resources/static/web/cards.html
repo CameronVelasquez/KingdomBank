@@ -23,7 +23,7 @@
             <div class="bg-header overlay-mobile" >
                 <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
                     <div class="container-fluid ">
-                      <a class="navbar-brand logo fw-bold" href="#"><img id="logo" src="./assets/img/Logo.PNG" alt="Logo" >Kingdom Bank</a>
+                      <a class="navbar-brand logo fw-bold" href="#"><img id="logo" src="./assets/img/newLogo.png" alt="Logo" ></a>
                       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                       </button>
@@ -49,20 +49,6 @@
                           <li class="nav-item">
                             <a class="nav-link link-hover nav-link-toggler" aria-current="page" :href='"account.html?id="+transactionId'>Your transactions</a>
                           </li>
-                          <hr>
-                          <li class="nav-item">
-                            <a class="nav-link welcome-toggler " aria-current="page" href="#">Contact account executive</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link welcome-toggler " href="#">Change Your Password</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link welcome-toggler " href="#">Block card</a>
-                          </li>
-                          <hr>
-                          <li class="nav-item">
-                            <a class="nav-link welcome-toggler " href="#">FAQ</a>
-                          </li>
                         </ul>
                       </div>
                     </div>
@@ -70,30 +56,405 @@
             </div>
         </header >
         <main class="d-flex flex-row">
-            <section class="sidenav">
-              <div class="sidenav-header overlay">
-                <h3 class="sideTitle fw-bold">What we wanna do?</h3>
-              </div>
-              <nav class="nav flex-column sidebarNav sidenav-body">
-                <a class="nav-link" href="#">Update Profile</a>
-                <a class="nav-link" href="#">Transfer</a>
-                <hr v-if="cards.length < 6">
-                <div class=" addNew ">
-                  <a v-if="cards.length < 6" href="./createCards.html" class="btn overlay w-60">Add Card</a>
+          <section class="sidenav">
+            <div class="sidenav-header overlay">
+              <h3 class="sideTitle fw-bold">What we wanna do?</h3>
+            </div>                
+            <nav class="nav flex-column sidebarNav sidenav-body">
+              
+              <a class="nav-link" href="#">Accounts Page</a>
+              <a class="nav-link" href="./transfers.html">Transfer Money</a>
+              <a class="nav-link" href="./loanApplication.html">Apply Loan</a>
+
+
+              
+            
+              <hr v-if="accounts.length < 3" >
+              <div v-if="accounts.length < 3" class=" addNew ">
+                <a type="button" class="btn overlay" data-bs-toggle="modal" id="booking-modal" data-bs-target="#exampleModal">Add Account</a> 
+                <!-- MODAL  -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="booking-modal" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Select account type:</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body d-flex flex-column justify-content-center">
+                        <select v-model="accountType" name="accountType" id="accountType">
+                          <option value="" disabled selected>Select an Option below</option>
+                          <option value="SAVINGS">Savings Account</option>
+                          <option value="CHECKING">Checking Account</option>
+                        </select>
+                      </div>
+                      <div class="modal-footer">
+                        <button @click="createAccounts" type="button" class="btn overlay">Create Account!</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <hr>
-                <a class="nav-link" href="#">Pay Services</a>
-                <a class="nav-link" href="#">Pay Insurances</a>
-                <a class="nav-link" href="#" >Pay Cards</a>
-                <hr>
-                <a class="nav-link" href="#">Contact your account executive</a>
-                <a class="nav-link" href="#">Contact Us!</a>
-                <a class="nav-link" href="#">FAQ</a>
-                <hr>
-                  <div class="logOut d-flex flex-column justify-content-end align-items-center "><a @click="logOut" class="btn overlay w-50">Log Out!</a></div>
-                
-              </nav>
-            </section>
+
+              </div>
+                   
+              <hr >
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalSidenavA">About our VISA Cards.</a>
+              <div class="modal fade" id="exampleModalSidenavA" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">About our VISA Cards:</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px;">
+                      <figure class="d-flex justify-content-center visamodal" style="width: 100%;"><img style="height: 200px; width: 200px;" src="./assets/img/visa.gif" alt="VISAgif"></figure>
+                      <p>Introducing Kingdom Bank's VISA debit and credit cards - the convenient way to pay for your everyday purchases. With our VISA cards, you don't need to worry about carrying cash or waiting in long checkout lines. Simply swipe your card and go. Plus, enjoy the peace of mind that comes with VISA's worldwide acceptance and fraud protection.</p>
+                      <p>But that's not all. Our VISA cards also come with rewards, making your purchases even more rewarding. Earn cashback, travel points, and other rewards with every purchase you make using your VISA card. So not only do you get the convenience of a credit or debit card, but you also get rewarded for your spending.</p>
+                      <p>Applying for a VISA card from Kingdom Bank is easy. Our online application process is fast and secure, and you can have your new card in your hands in no time. With a variety of VISA options to choose from, you can find the card that best fits your lifestyle and spending habits.</p>
+                      <p>Say goodbye to the hassle of cash and hello to the convenience and rewards of Kingdom Bank's VISA debit and credit cards. Apply today and start enjoying the benefits of easy payments and plentiful rewards.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>                 
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalSidenavB">Card Silver</a>
+              <div class="modal fade" id="exampleModalSidenavB" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">VISA Silver:</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px;">
+                      <section id="cardTemplate">
+                        <div class="card card-container card-account"> 
+                            <div  class="card-body d-flex flex-column justify-content-center align-items-center">
+            
+                                <div class="solo-card">
+                                <!-- CARD FRONT -->
+                                    <div  class=" card__front card__part cardSilver">   
+                                    <div class="d-flex justify-content-between ">  
+                                      <img class="card__front-square card__square" id="logo-card" src="./assets/img/Logo.PNG">
+                                      <span>color</span>
+                                      <span class="card__label">type</span>
+                                      <img class="card__front-logo card__logo" src="./assets/img/logovisa.png">
+                                    </div>
+                                    <p class="card_numer">**** **** **** 0000</p>
+                                    <div class="card__space-75">
+                                      <span class="card__label">Card holder</span>
+                                      <p class="card__info">{{objectClient.firstName}} {{objectClient.lastName}}</p>
+                                    </div>
+                                    <div class="card__space-25">
+                                      <span class="card__label">Expires</span>
+                                            <p class="card__info">mm/yy</p>
+                                    </div>
+                                    </div>
+                                <!-- CARD-BACK -->
+                                    <div class="card__back card__part cardSilver">
+                                    <div class="card__black-line"></div>
+                                    <div class="card__back-content">
+                                      <div class="card__secret">
+                                        <p class="card__secret--last">CVV</p>
+                                      </div>
+                                      <p id="textBack-card">This card is property of client {{objectClient.firstName}} {{objectClient.lastName}}. Its usage is personal and unstranferible and is linked to the subscribed contract. Card avaible for five years, counting from: mm/yy.</p>  
+                                              
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                      <p>Indulge in luxury with Kingdom Bank's VISA Silver credit card. Enjoy a higher credit limit and exclusive benefits that make luxury purchases more affordable and rewarding. With our VISA Silver card, you can enjoy access to exclusive travel perks and discounts, such as travel insurance, airport lounge access, and more. 
+                      </p> 
+                      <p>
+                        Elevate your spending power with Kingdom Bank's VISA Silver card and enjoy a world of luxury and rewards. Apply today and start enjoying the exclusive benefits and rewards of a VISA Silver card from Kingdom Bank.
+                      </p>                     
+                    </div>
+                    <div class="modal-footer">                          
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalSidenavC">Card Gold</a>
+              <div class="modal fade" id="exampleModalSidenavC" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">VISA GOLD:</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px;">
+                      <section id="cardTemplate">
+                        <div class="card card-container card-account"> 
+                            <div  class="card-body d-flex flex-column justify-content-center align-items-center">
+            
+                                <div class="solo-card">
+                                <!-- CARD FRONT -->
+                                    <div  class=" card__front card__part cardGold">   
+                                    <div class="d-flex justify-content-between ">  
+                                      <img class="card__front-square card__square" id="logo-card" src="./assets/img/Logo.PNG">
+                                      <span>color</span>
+                                      <span class="card__label">type</span>
+                                      <img class="card__front-logo card__logo" src="./assets/img/logovisa.png">
+                                    </div>
+                                    <p class="card_numer">**** **** **** 0000</p>
+                                    <div class="card__space-75">
+                                      <span class="card__label">Card holder</span>
+                                      <p class="card__info">{{objectClient.firstName}} {{objectClient.lastName}}</p>
+                                    </div>
+                                    <div class="card__space-25">
+                                      <span class="card__label">Expires</span>
+                                            <p class="card__info">mm/yy</p>
+                                    </div>
+                                    </div>
+                                <!-- CARD-BACK -->
+                                    <div class="card__back card__part cardGold">
+                                    <div class="card__black-line"></div>
+                                    <div class="card__back-content">
+                                      <div class="card__secret">
+                                        <p class="card__secret--last">CVV</p>
+                                      </div>
+                                      <p id="textBack-card">This card is property of client {{objectClient.firstName}} {{objectClient.lastName}}. Its usage is personal and unstranferible and is linked to the subscribed contract. Card avaible for five years, counting from: mm/yy.</p>  
+                                              
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                      <p>Take your travels to the next level with Kingdom Banking's VISA Gold credit card. With our VISA Gold card, you can enjoy exclusive airport lounge access, expedited security screening, and other travel perks to make your journeys smooth and stress-free. 
+                      </p> 
+                      <p>
+                        Plus, enjoy a higher credit limit and exclusive benefits that make luxury purchases more affordable and rewarding. Elevate your travel and spending experiences with Kingdom Banking's VISA Gold card. Apply today and start enjoying the exclusive benefits and rewards of a VISA Gold card from Kingdom Banking. 
+                      </p>                     
+                    </div>
+                    <div class="modal-footer">                          
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalSidenavD">Card Titanium</a>
+              <div class="modal fade" id="exampleModalSidenavD" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">VISA Titanium:</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px;">
+                      <section id="cardTemplate">
+                        <div class="card card-container card-account"> 
+                            <div  class="card-body d-flex flex-column justify-content-center align-items-center">
+            
+                                <div class="solo-card">
+                                <!-- CARD FRONT -->
+                                    <div  class=" card__front card__part cardTitanium">   
+                                    <div class="d-flex justify-content-between ">  
+                                      <img class="card__front-square card__square" id="logo-card" src="./assets/img/Logo.PNG">
+                                      <span>color</span>
+                                      <span class="card__label">type</span>
+                                      <img class="card__front-logo card__logo" src="./assets/img/logovisa.png">
+                                    </div>
+                                    <p class="card_numer">**** **** **** 0000</p>
+                                    <div class="card__space-75">
+                                      <span class="card__label">Card holder</span>
+                                      <p class="card__info">{{objectClient.firstName}} {{objectClient.lastName}}</p>
+                                    </div>
+                                    <div class="card__space-25">
+                                      <span class="card__label">Expires</span>
+                                            <p class="card__info">mm/yy</p>
+                                    </div>
+                                    </div>
+                                <!-- CARD-BACK -->
+                                    <div class="card__back card__part cardTitanium">
+                                    <div class="card__black-line"></div>
+                                    <div class="card__back-content">
+                                      <div class="card__secret">
+                                        <p class="card__secret--last">CVV</p>
+                                      </div>
+                                      <p id="textBack-card">This card is property of client {{objectClient.firstName}} {{objectClient.lastName}}. Its usage is personal and unstranferible and is linked to the subscribed contract. Card avaible for five years, counting from: mm/yy.</p>  
+                                              
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                      <p>Experience unparalleled prestige with Kingdom Bank's VISA Titanium credit card. Our VISA Titanium card is designed to cater to your elite lifestyle, offering a range of exclusive benefits and rewards. With a higher credit limit, you can make the luxury purchases you deserve with ease. 
+                      </p> 
+                      <p>
+                        Enjoy access to VIP airport lounges, 24/7 concierge services, and other premium benefits that will elevate your travel experiences. Our VISA Titanium card also comes with extensive insurance coverage and security features, providing you with peace of mind wherever you go.  
+                      </p>  
+                      <p>
+                        Apply today and enjoy the prestige and privileges of a VISA Titanium card from Kingdom Bank.
+                      </p>                   
+                    </div>
+                    <div class="modal-footer">                          
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalSidenavE">About our Loans</a>
+              <div class="modal fade" id="exampleModalSidenavE" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">About our Loans:</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px;">
+                      <img src="./assets/img/loans.png" alt="">
+                      <p>Whether you're starting a new business, making a significant purchase, or facing unexpected expenses, a loan offered by Kingdom Bank can be a smart financial move. A loan can provide the funds you need to achieve your goals without having to wait years to save up. With Kingdom Bank, you can access competitive interest rates and flexible repayment terms, making it easier to manage your debt. Additionally, taking out a loan can also help build your credit score if you make timely payments. If you're looking for a way to fund your next big project or get through a tough financial situation, consider a loan from Kingdom Bank and take control of your finances.</p>
+                      <p>One of the most significant advantages of a loan is the ability to invest in yourself or your future. Whether you're seeking a higher education degree, upgrading your home, or starting a new business, a loan can help you achieve your goals faster. With Kingdom Bank, you can access a wide range of loan options, including personal loans, business loans, and education loans. Our loan experts will work with you to find a loan that fits your specific needs and budget.</p>
+                      <p>In addition to helping you achieve your goals, taking out a loan from Kingdom Bank can also help you navigate unexpected financial challenges. Whether it's a medical emergency, car repair, or home renovation, life can throw you curveballs that you're not always financially prepared for. A loan can help you cover these unexpected expenses and give you peace of mind knowing that you have a financial safety net. With Kingdom Bank, you can access quick and easy loan applications and approvals, so you can get the funds you need when you need them.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalSidenavF">Personal Loan</a>
+              <div class="modal fade" id="exampleModalSidenavF" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">PERSONAL:</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px;">
+                      <img src="./assets/img/healthcare.png" alt="">
+                      <p>A personal loan is a versatile financial tool that can help you manage your finances in a variety of ways. Whether you're consolidating high-interest debt, funding a home renovation, or covering unexpected expenses, a personal loan from Kingdom Bank can provide you with the funds you need. Unlike secured loans, personal loans don't require collateral, making them accessible to a wide range of borrowers.</p>
+                      <p> With Kingdom Bank, you can access competitive interest rates and flexible repayment terms, making it easier to manage your debt. Our loan experts will work with you to determine the loan amount and repayment schedule that fits your budget and financial goals. Apply for a personal loan from Kingdom Bank today and take control of your finances.</p>
+               
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalSidenavG">Mortgage Loan</a>
+              <div class="modal fade" id="exampleModalSidenavG" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">MORTGAGE:</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px;">
+                      <img src="./assets/img/mortgage.png" alt="">
+                      <p>A mortgage loan is a type of secured loan used to purchase a home or other real estate property. With a mortgage loan from Kingdom Bank, you can access a range of competitive interest rates and repayment terms, making it easier to finance your dream home.</p>
+                      <p>Our loan experts will work with you to find a mortgage loan that fits your specific needs and budget, taking into account your credit score, income, and other financial factors. We offer fixed and adjustable-rate mortgages, jumbo loans, and government-backed loans like FHA, VA, and USDA loans.</p>
+                      <p>Our online mortgage application process is quick and easy, and you can track your loan status in real-time. Whether you're a first-time homebuyer or looking to refinance your existing mortgage, Kingdom Bank can help you achieve your homeownership goals. Apply for a mortgage loan from Kingdom Bank today and start making your dream home a reality.</p>
+               
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalSidenavH">Automotive Loan</a>
+              <div class="modal fade" id="exampleModalSidenavH" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">AUTOMOTIVE:</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px;">
+                      <img src="./assets/img/automotive.png" alt="">
+                      <p>An automotive loan from Kingdom Bank is a smart financial choice if you're looking to purchase a new or used car. Our auto loans come with competitive interest rates and flexible repayment terms, making it easier to manage your car payments. With Kingdom Bank, you can apply for an automotive loan online and receive a quick response within minutes.</p>
+                      <p>Our loan experts will work with you to find the right loan amount and repayment schedule that fits your budget and financial goals. We offer financing for new and used cars, as well as refinancing options for existing auto loans.</p>
+                      <p>With Kingdom Bank, you can enjoy a hassle-free car buying experience with our convenient and streamlined loan process. Apply for an automotive loan from Kingdom Bank today and get behind the wheel of your dream car.</p>
+               
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalSidenavI">Contact us</a>
+              <div class="modal fade" id="exampleModalSidenavI" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Contact Us:</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-3 justify-content-center align-items-center m-0 p-0" style="font-size: 12px;">
+                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3365.800083394195!2d-94.10234578500734!3d32.47803858106334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8636e8709e3caa31%3A0x9aa17143544fccf7!2s348%20Lakewood%20Rd%2C%20Waskom%2C%20TX%2075692%2C%20USA!5e0!3m2!1sen!2scl!4v1679375689822!5m2!1sen!2scl" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                      <div class="d-flex flex-column justify-content-center align-items-center">
+                        <a href="tel:(903) 687-3677">(903) 687-3677</a>
+                        <p>348 Lakewood Rd</p>
+                        <p>Waskom, Texas(TX), 75692</p>
+                        <a href="mailto:contact@kingdombank.com">contact@kingdombank.com</a>
+                      </div>
+               
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalSidenavJ">FAQ</a>
+              <div class="modal fade" id="exampleModalSidenavJ" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Frequently Asked Questions (FAQs):</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px;">
+                      <ol style="font-size: 10px;">
+                        <li><h6>How can I open a bank account?</h6>
+                          <p>You can open a bank account by visiting our branch office or by applying online through our website. You will need to provide identification documents and other necessary details to complete the process.</p>
+                        </li>
+                        <li><h6>What types of accounts do you offer?</h6>
+                          <p>We offer a range of accounts, including savings accounts, current accounts, fixed deposit accounts, and recurring deposit accounts.</p>
+                        </li>
+                        <li><h6>How do I check my account balance?</h6>
+                          <p>You can check your account balance through our online banking portal or by visiting our nearest branch office.</p>
+                        </li>
+                        <li><h6>How do I transfer funds to another account?</h6>
+                          <p>You can transfer funds through our online banking portal or by visiting our nearest branch office. You will need to provide the account number and other necessary details of the recipient.</p>
+                        </li>
+                        <li><h6>How do I apply for a loan?</h6>
+                          <p>You can apply for a loan by visiting our nearest branch office or by applying online through our website. You will need to provide documentation and other necessary details to complete the application process.</p>
+                        </li>
+                        <li><h6>What is the interest rate on your loans and deposits?</h6>
+                          <p>Our interest rates vary depending on the type of account or loan. Please refer to our website or visit our nearest branch office for current rates.</p>
+                        </li>
+                        <li><h6>What is your bank's policy on security and fraud prevention?</h6>
+                          <p>We take security and fraud prevention very seriously. We use advanced security measures to protect our customers' personal and financial information. In case of any suspicious activity, we encourage our customers to report it immediately to our customer service team.</p>
+                        </li>
+                        <li><h6>How can I contact your customer service team?</h6>
+                          <p>You can contact our customer service team by phone, email, or by visiting our nearest branch office. Please refer to our website for contact details.</p>
+                        </li>
+                      </ol>
+                      <p>We hope these FAQs have addressed some of your concerns. If you have any further questions, please don't hesitate to contact us.</p>
+               
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="logOut d-flex flex-column justify-content-end align-items-center "><a @click="logOut" class="btn overlay w-50">Log Out!</a></div>
+              
+            </nav>
+          </section>
             
             <div class="d-flex flex-column aside-sidenav" >
               <section v-if="cards.length > 0" class="accountCard-section main-sections">
@@ -216,13 +577,12 @@
                           </div>
                           </div>
                         </div>
-                        <div class="card-footer d-flex flex-column justify-content-center">
-
+                        <div class="card-footer d-flex flex-column justify-content-center align-items-center gap-3">
                           <select v-model="number" name="" id="">
                             <option value="" disabled selected>Select a card to delete</option>
                             <option :value="card.number">Card: {{card.number}}</option>
-                          </select>  <!-- hasta aqui el account.number si me captura el numero de tarjeta -->
-                          <button type="submit" @click="alertDeleteCard">Delete this card.</button>                         
+                          </select>
+                          <button class="btn overlayB" style="color: white;width: 50%;" type="submit" @click="alertDeleteCard">Delete this card.</button>                         
                         </div>
                     
                   </div>
@@ -272,7 +632,7 @@
               </section>
               <!-- Dropdowns Menu -->
               <section v-if="cards.length > 0" class="dropdown-menues main-sections">
-                <h2>Cards info:</h2>
+                <h2>Currently, you own this cards:</h2>
                 <nav class="button" >
                     <div>
                       
@@ -284,7 +644,7 @@
                       <div class="collapse navbar-collapse justify-content-end" id="collapsable-btn-credit" >
                         <ul class="navbar-nav" >
                           <li v-for="card of cards"  class="nav-item">
-                                <a title="click here!" v-if="card.type === 'CREDIT' && card.thruDate >= currentCardDate" class="nav-link collapsable-link">{{card.type}} {{card.color}} (See more transactions)</a>
+                                <a title="click here!" v-if="card.type === 'CREDIT' && card.thruDate >= currentCardDate" class="nav-link collapsable-link">{{card.type}} {{card.color}} </a>
                           </li>
                         </ul>
                       </div>
@@ -302,7 +662,7 @@
                       <div class="collapse navbar-collapse justify-content-end" id="collapsable-btn-debit" >
                         <ul class="navbar-nav" >
                           <li v-for="card of cards"  class="nav-item">
-                                <a title="click here!" v-if="card.type === 'DEBIT' && card.thruDate >= currentCardDate" class="nav-link collapsable-link">{{card.type}} {{card.color}} (See more transactions)</a>
+                                <a title="click here!" v-if="card.type === 'DEBIT' && card.thruDate >= currentCardDate" class="nav-link collapsable-link">{{card.type}} {{card.color}}</a>
                           </li>
                         </ul>
                       </div>
@@ -339,37 +699,9 @@
                     </div>
                   </nav>
               </section>
+              <!-- LOANS -->
               <section class="dropdown-menues main-sections">
-            <h2>Insurances:</h2>
-            <nav class="button" >
-              <div>
-                
-                <button class="navbar-toggler d-flex justify-content-between options overlay" type="button" data-bs-toggle="collapse" data-bs-target="#collapsable-btn-3" aria-controls="collapsable-btn-3" aria-expanded="false" aria-label="Toggle navigation">
-                  <div class="d-flex flex-row"> <p class="options-paragraphs fw-semibold">Your Insurances </p> <p>(click here)</p></div>
-                  <!-- aqui icono flecha -->
-                <i class="fa-solid fa-caret-down"></i>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="collapsable-btn-3">
-                  <ul class="navbar-nav">
-                    <li class="nav-item">
-                          <a class="nav-link collapsable-link">Request.</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link collapsable-link" aria-current="page" href="#">Requirements.</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link collapsable-link" href="#">More Info.</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link collapsable-link" href="#">Any other questions? Please contact us!</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </nav>
-              </section>
-              <section class="dropdown-menues main-sections">
-                <h2>Loans:</h2>
+                <h2 class="mt-3" >Loans:</h2>
                 <nav class="button" >
                   <div>
                     
@@ -404,10 +736,55 @@
                               </div>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link collapsable-link" href="#">More Info.</a>
+                          <a class="nav-link collapsable-link" data-bs-toggle="modal" data-bs-target="#dropdownsModalMoreLoan">More Info.</a>
+                          <div class="modal fade" id="dropdownsModalMoreLoan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">About our Accounts:</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px;">
+                                  
+                                  <p>>Whether you're starting a new business, making a significant purchase, or facing unexpected expenses, a loan offered by Kingdom Bank can be a smart financial move. A loan can provide the funds you need to achieve your goals without having to wait years to save up. With Kingdom Bank, you can access competitive interest rates and flexible repayment terms, making it easier to manage your debt. Additionally, taking out a loan can also help build your credit score if you make timely payments. If you're looking for a way to fund your next big project or get through a tough financial situation, consider a loan from Kingdom Bank and take control of your finances.</p>
+
+                                  <p>One of the most significant advantages of a loan is the ability to invest in yourself or your future. Whether you're seeking a higher education degree, upgrading your home, or starting a new business, a loan can help you achieve your goals faster. With Kingdom Bank, you can access a wide range of loan options, including personal loans, business loans, and education loans. Our loan experts will work with you to find a loan that fits your specific needs and budget.</p>
+
+                                  <p>In addition to helping you achieve your goals, taking out a loan from Kingdom Bank can also help you navigate unexpected financial challenges. Whether it's a medical emergency, car repair, or home renovation, life can throw you curveballs that you're not always financially prepared for. A loan can help you cover these unexpected expenses and give you peace of mind knowing that you have a financial safety net. With Kingdom Bank, you can access quick and easy loan applications and approvals, so you can get the funds you need when you need them.</p>
+          
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div> 
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link collapsable-link" href="#">Any other questions? Please contact us!</a>
+                          <a class="nav-link collapsable-link" data-bs-toggle="modal" data-bs-target="#dropdownsModalMbContact">Any other questions? Please contact us!</a>
+                      <div class="modal fade" id="dropdownsModalMbContact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Contact Us:</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body d-flex flex-column gap-3 justify-content-center align-items-center m-0 p-0" style="font-size: 12px; color: black;">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3365.800083394195!2d-94.10234578500734!3d32.47803858106334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8636e8709e3caa31%3A0x9aa17143544fccf7!2s348%20Lakewood%20Rd%2C%20Waskom%2C%20TX%2075692%2C%20USA!5e0!3m2!1sen!2scl!4v1679375689822!5m2!1sen!2scl" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                              <a href="tel:(903) 687-3677">(903) 687-3677</a>
+                              <p>348 Lakewood Rd</p>
+                              <p>Waskom, Texas(TX), 75692</p>
+                              <a href="mailto:contact@kingdombank.com">contact@kingdombank.com</a>
+                            </div>
+                    
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
                         </li>
                       </ul>
                     </div>
@@ -424,103 +801,326 @@
                           <a class="nav-link collapsable-link" href="#">More Info.</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link collapsable-link" href="#">Any other questions? Please contact us!</a>
+                          <a class="nav-link collapsable-link" data-bs-toggle="modal" data-bs-target="#dropdownsModalMbContact">Any other questions? Please contact us!</a>
+                          <div class="modal fade" id="dropdownsModalMbContact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Contact Us:</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body d-flex flex-column gap-3 justify-content-center align-items-center m-0 p-0" style="font-size: 12px; color: black;">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3365.800083394195!2d-94.10234578500734!3d32.47803858106334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8636e8709e3caa31%3A0x9aa17143544fccf7!2s348%20Lakewood%20Rd%2C%20Waskom%2C%20TX%2075692%2C%20USA!5e0!3m2!1sen!2scl!4v1679375689822!5m2!1sen!2scl" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                  <a href="tel:(903) 687-3677">(903) 687-3677</a>
+                                  <p>348 Lakewood Rd</p>
+                                  <p>Waskom, Texas(TX), 75692</p>
+                                  <a href="mailto:contact@kingdombank.com">contact@kingdombank.com</a>
+                                </div>
+                        
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </nav>
-                  </section>
+              </section>
+              <!-- ACC TYPES -->
+              <section class="dropdown-menues main-sections">
+               <h2 class="mt-3" >Account Types:</h2>
+            <nav class="button" >
+              <div>
+                
+                <button class="navbar-toggler d-flex justify-content-between options overlay" type="button" data-bs-toggle="collapse" data-bs-target="#collapsable-btn-3" aria-controls="collapsable-btn-3" aria-expanded="false" aria-label="Toggle navigation">
+                  <div class="d-flex flex-row"> <p class="options-paragraphs fw-semibold">Account Types </p> <p>(click here)</p></div>
+                  <!-- aqui icono flecha -->
+                <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="collapsable-btn-3">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a title="click here!" style="cursor: pointer;" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalDropdownA">CHECKING</a>
+                      <div class="modal fade" id="exampleModalDropdownA" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="exampleModalLabel">CHECKIMG:</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px;">
+                              <h3>Benefits of owning this account:</h3>
+                              <p>A checking account is a basic financial tool that provides many benefits for individuals and families. It allows you to store your money in a secure place and access it easily when you need it. Here are some of the reasons why having a checking account is important:</p>
+                              <ul>
+                                <li>Convenience: With a checking account, you can make deposits and withdrawals easily through various channels such as ATMs, online banking, and mobile banking. You don't have to worry about carrying large amounts of cash or writing checks for every transaction. This convenience can save you time and make your financial life much easier.</li>
+                                <li>Security: Keeping your money in a checking account is much safer than carrying cash. If your wallet or purse is stolen, the cash inside is gone forever. However, with a checking account, you can quickly report any fraudulent activity and get your money back.</li>
+                                <li>Bill Payments: A checking account enables you to set up automatic bill payments. This means you can schedule payments for your monthly expenses like rent, utilities, and loans, without having to remember the due dates every month. It can help you avoid late fees and protect your credit score.</li>
+                                <li>Tracking Expenses: With a checking account, you can easily track your expenses. You can see your transaction history and monitor your spending patterns. This information can help you create a budget and make better financial decisions.</li>
+                                <li>Access to Credit: Having a checking account is often a requirement for obtaining credit. Lenders typically look at your financial history, including your bank account, when deciding whether to approve your loan or credit card application. A checking account shows that you have a stable source of income and can manage your finances responsibly.</li>
+                              </ul>
+                              <p>In summary, having a checking account is an essential tool for managing your finances. It provides convenience, security, helps you track expenses, pay bills on time, and access to credit. By opening a checking account, you can take control of your financial life and achieve your financial goals.</p>
+                              
+                       
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <a title="click here!" style="cursor: pointer;" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModalDropdown">SAVINGS</a>
+                      <div class="modal fade" id="exampleModalDropdown" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="exampleModalLabel">SAVINGS:</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px;">
+                              <h3>Benefits of owning this account:</h3>
+                              <p>A savings account is a basic financial tool that provides many benefits for individuals and families. It allows you to store your money in a secure place and access it easily when you need it. Here are some of the reasons why having a savings account is important:</p>
+                              <ul>
+                                <li>Convenience: With a savings account, you can make deposits and withdrawals easily through various channels such as ATMs, online banking, and mobile banking. You don't have to worry about carrying large amounts of cash or writing checks for every transaction. This convenience can save you time and make your financial life much easier.</li>
+                                <li>Security: Keeping your money in a savings account is much safer than carrying cash. If your wallet or purse is stolen, the cash inside is gone forever. However, with a savings account, you can quickly report any fraudulent activity and get your money back.</li>
+                                <li>Bill Payments: A savings account enables you to set up automatic bill payments. This means you can schedule payments for your monthly expenses like rent, utilities, and loans, without having to remember the due dates every month. It can help you avoid late fees and protect your credit score.</li>
+                                <li>Tracking Expenses: With a savings account, you can easily track your expenses. You can see your transaction history and monitor your spending patterns. This information can help you create a budget and make better financial decisions.</li>
+                                <li>Access to Credit: Having a savings account is often a requirement for obtaining credit. Lenders typically look at your financial history, including your bank account, when deciding whether to approve your loan or credit card application. A savings account shows that you have a stable source of income and can manage your finances responsibly.</li>
+                              </ul>
+                              <p>In summary, having a savings account is an essential tool for managing your finances. It provides convenience, security, helps you track expenses, pay bills on time, and access to credit. By opening a savings account, you can take control of your financial life and achieve your financial goals.</p>
+                              
+                       
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <li class="nav-item">
+                      <a class="nav-link collapsable-link" data-bs-toggle="modal" data-bs-target="#dropdownsModalMoreAccount">More Info.</a>
+                      <div class="modal fade" id="dropdownsModalMoreAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="exampleModalLabel">About our Accounts:</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px;">
+                              <figure class="d-flex justify-content-center visamodal" style="width: 100%;"><img style="height: 200px; width: 200px;" src="./assets/img/loans.png" alt="refImg"></figure>
+                              <p>At Kingdom Bank, we believe that managing your finances should be simple, convenient, and stress-free. With an account at Kingdom Bank, you can enjoy a host of benefits that make banking with us a smart choice.</p>
+                              <p>First and foremost, we offer a wide range of account options to suit your unique needs, whether you're looking for a basic checking account or a high-yield savings account. Our accounts come with a variety of features, including online banking, mobile banking, and bill pay, so you can manage your money on the go.</p>
+                              <p>At Kingdom Bank, we also prioritize security, and our state-of-the-art systems and protocols ensure that your personal and financial information is always protected. You can rest easy knowing that your money is safe with us.</p>
+                              <p>In addition, we pride ourselves on exceptional customer service. Our friendly and knowledgeable team is always here to assist you with any questions or concerns you may have. Whether you prefer to bank online, over the phone, or in person, we're here to make your banking experience as smooth and enjoyable as possible.</p>
+                              <p>Finally, we understand the importance of giving back to our community. As a member of Kingdom Bank, you'll have the opportunity to participate in our community outreach programs and charitable initiatives, helping to make a positive impact in the lives of those around us.</p>
+                              <p>In short, owning an account at Kingdom Bank means more than just having a place to keep your money. It means joining a community of individuals and families who value convenience, security, exceptional service, and giving back. We invite you to become a part of the Kingdom Bank family today.</p>
+      
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div> 
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link collapsable-link" data-bs-toggle="modal" data-bs-target="#dropdownsModalMbContact">Any other questions? Please contact us!</a>
+                      <div class="modal fade" id="dropdownsModalMbContact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Contact Us:</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body d-flex flex-column gap-3 justify-content-center align-items-center m-0 p-0" style="font-size: 12px; color: black;">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3365.800083394195!2d-94.10234578500734!3d32.47803858106334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8636e8709e3caa31%3A0x9aa17143544fccf7!2s348%20Lakewood%20Rd%2C%20Waskom%2C%20TX%2075692%2C%20USA!5e0!3m2!1sen!2scl!4v1679375689822!5m2!1sen!2scl" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                              <a href="tel:(903) 687-3677">(903) 687-3677</a>
+                              <p>348 Lakewood Rd</p>
+                              <p>Waskom, Texas(TX), 75692</p>
+                              <a href="mailto:contact@kingdombank.com">contact@kingdombank.com</a>
+                            </div>
+                    
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                      
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+              </section>
               
             </div>
         </main>
         <footer >
+          <div style="width: 100%;" class="d-flex justify-content-center">
             <nav>
-              <div class="footer">
-                <div class="contain">
-                <div class="col">
-                  <h1 class=" fw-bold">Company</h1>
-                  <ul>
-                    <li>About</li>
-                    <li>Mission</li>
-                    <li>Services</li>
-                    <li>Social</li>
-                    <li>Get in touch</li>
-                  </ul>
+            <div class="footer">
+              <div class="contain">
+              
+              <div class="col">
+                <h1 class=" fw-bold">Cards</h1>
+                <ul>
+                  <li><a style="text-decoration: none;" href="./createCards.html" class="rrss">Your Cards</a></li>
+                  <li><a style="text-decoration: none;" href="" class="rrss">KB SILVER</a></li>
+                  <li><a style="text-decoration: none;" href="" class="rrss">KB GOLD</a></li>
+                  <li><a style="text-decoration: none;" href="" class="rrss">KB TITANIUM</a></li>
+                </ul>
+              </div>
+              <div class="col">
+                <h1 class=" fw-bold">Accounts</h1>
+                <ul>
+                  <li><a style="text-decoration: none;" href="./accounts.html" class="rrss">Accounts main</a></li>
+                  <li><a style="text-decoration: none;" :href='"account.html?id="+transactionId' class="rrss">Your Accounts</a></li>
+                  <li><a style="text-decoration: none;" :href='"account.html?id="+transactionId' class="rrss">Your Transactions</a></li>
+                </ul>
+              </div>
+              <div class="col">
+                <h1 class=" fw-bold">Support</h1>
+                <ul>
+                  <li><a style="text-decoration: none;" href="./accounts.html" class="rrss" data-bs-toggle="modal" data-bs-target="#exampleModalSidenavI">Contact Us!</a></li>
+                 <div class="modal fade" id="exampleModalSidenavI" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Contact Us:</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body d-flex flex-column gap-3 justify-content-center align-items-center m-0 p-0" style="font-size: 12px;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3365.800083394195!2d-94.10234578500734!3d32.47803858106334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8636e8709e3caa31%3A0x9aa17143544fccf7!2s348%20Lakewood%20Rd%2C%20Waskom%2C%20TX%2075692%2C%20USA!5e0!3m2!1sen!2scl!4v1679375689822!5m2!1sen!2scl" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                          <a href="tel:(903) 687-3677">(903) 687-3677</a>
+                          <p>348 Lakewood Rd</p>
+                          <p>Waskom, Texas(TX), 75692</p>
+                          <a href="mailto:contact@kingdombank.com">contact@kingdombank.com</a>
+                        </div>
+                 
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="col">
-                  <h1 class=" fw-bold">Products</h1>
-                  <ul>
-                    <li>HB VISTA</li>
-                    <li>HB INTERNATIONAL</li>
-                    <li>HB DEBIT</li>
-                    <li>AppBanKing app</li>
-                    <li>HB GOLDEN STAR</li>
-                  </ul>
+                <li><a style="text-decoration: none;" class="rrss" data-bs-toggle="modal" data-bs-target="#exampleModalSidenavJ">FAQs</a></li>
+                  <li><a style="text-decoration: none; font-size: 10px;" class="rrss" href="mailto:contact@kingdombank.com">contact@kingdombank.com</a></li>
+                  <li><a style="text-decoration: none; font-size: 10px;" class="rrss" href="tel:(903) 687-3677">Phone: (903) 687-3677</a></li>
+                </ul>
+              </div>
+              <div class="col social">
+                <h1 class=" fw-bold">Social</h1>
+                <ul>
+                  <li><a href="https://www.facebook.com/" class="rrss"><i class="fa-brands fa-facebook"></i></a></li>
+                  <li><a href="https://twitter.com/" class="rrss"><i class="fa-brands fa-twitter"></i></a></li>
+                  <li><a href="https://www.instagram.com/" class="rrss"><i class="fa-brands fa-instagram"></i></a></li>
+                </ul>
+              </div>
+          </nav>
+        </div>
+        <nav class="overlay2 footer-mobile">
+          <ul class="nav ">
+              <li class="items-footer">
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+                <a class="nav-link font" aria-current="page" href="./accounts.html">Home</a>
+              </li>
+              <li class="items-footer separation">
+                <i class="fa-solid fa-right-left"></i>
+                <a class="nav-link font" href="./transfers.html">Transfer</a>
+              </li>
+              <li class="items-footer separation text-center">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <a @click="logOut" class="nav-link font" >Log Out</a>
+              </li>
+              <li class="items-footer separation">
+                <i class="fa-sharp fa-solid fa-circle-question"></i>
+                <a data-bs-toggle="modal" data-bs-target="#footerModalMb" class="nav-link font">FAQs</a>                    
+                <div class="modal fade" id="footerModalMb" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Frequently Asked Questions (FAQs):</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body d-flex flex-column gap-3" style="font-size: 12px; color: black;">
+                      
+                        <ol style="font-size: 10px;">
+                          <li><h6>How can I open a bank account?</h6>
+                            <p>You can open a bank account by visiting our branch office or by applying online through our website. You will need to provide identification documents and other necessary details to complete the process.</p>
+                          </li>
+                          <li><h6>What types of accounts do you offer?</h6>
+                            <p>We offer a range of accounts, including savings accounts, current accounts, fixed deposit accounts, and recurring deposit accounts.</p>
+                          </li>
+                          <li><h6>How do I check my account balance?</h6>
+                            <p>You can check your account balance through our online banking portal or by visiting our nearest branch office.</p>
+                          </li>
+                          <li><h6>How do I transfer funds to another account?</h6>
+                            <p>You can transfer funds through our online banking portal or by visiting our nearest branch office. You will need to provide the account number and other necessary details of the recipient.</p>
+                          </li>
+                          <li><h6>How do I apply for a loan?</h6>
+                            <p>You can apply for a loan by visiting our nearest branch office or by applying online through our website. You will need to provide documentation and other necessary details to complete the application process.</p>
+                          </li>
+                          <li><h6>What is the interest rate on your loans and deposits?</h6>
+                            <p>Our interest rates vary depending on the type of account or loan. Please refer to our website or visit our nearest branch office for current rates.</p>
+                          </li>
+                          <li><h6>What is your bank's policy on security and fraud prevention?</h6>
+                            <p>We take security and fraud prevention very seriously. We use advanced security measures to protect our customers' personal and financial information. In case of any suspicious activity, we encourage our customers to report it immediately to our customer service team.</p>
+                          </li>
+                          <li><h6>How can I contact your customer service team?</h6>
+                            <p>You can contact our customer service team by phone, email, or by visiting our nearest branch office. Please refer to our website for contact details.</p>
+                          </li>
+                        </ol>
+                        <p>We hope these FAQs have addressed some of your concerns. If you have any further questions, please don't hesitate to contact us.</p>
+                 
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+               </div>
+            </li>
+              <li class="items-footer separation">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <a class="nav-link font"data-bs-toggle="modal" data-bs-target="#footerModalMbContact">Contact Us</a>
+                 <div class="modal fade" id="footerModalMbContact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Contact Us:</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column gap-3 justify-content-center align-items-center m-0 p-0" style="font-size: 12px; color: black;">
+                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3365.800083394195!2d-94.10234578500734!3d32.47803858106334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8636e8709e3caa31%3A0x9aa17143544fccf7!2s348%20Lakewood%20Rd%2C%20Waskom%2C%20TX%2075692%2C%20USA!5e0!3m2!1sen!2scl!4v1679375689822!5m2!1sen!2scl" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                      <div class="d-flex flex-column justify-content-center align-items-center">
+                        <a href="tel:(903) 687-3677">(903) 687-3677</a>
+                        <p>348 Lakewood Rd</p>
+                        <p>Waskom, Texas(TX), 75692</p>
+                        <a href="mailto:contact@kingdombank.com">contact@kingdombank.com</a>
+                      </div>
+               
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
                 </div>
-                <div class="col">
-                  <h1 class=" fw-bold">Accounts</h1>
-                  <ul>
-                    <li>Your Accounts</li>
-                    <li>Open new!</li>
-                    <li>Add Card</li>
-                    <li>Update</li>
-                    <li>Edit</li>
-                  </ul>
-                </div>
-                <div class="col">
-                  <h1 class=" fw-bold">Navigation</h1>
-                  <ul>
-                    <li>Accounts</li>
-                    <li>Services</li>
-                    <li>Insurances</li>
-                    <li>Cards</li>
-                    <li>Contact your account executive</li>
-                    <li>FAQ</li>
-                  </ul>
-                </div>
-                <div class="col">
-                  <h1 class=" fw-bold">Support</h1>
-                  <ul>
-                    <li>Contact us</li>
-                    <li>Web chat</li>
-                    <li>Open ticket</li>
-                  </ul>
-                </div>
-                <div class="col social">
-                  <h1 class=" fw-bold">Social</h1>
-                  <ul>
-                    <li><a href="https://www.facebook.com/" class="rrss"><i class="fa-brands fa-facebook"></i></a></li>
-                    <li><a href="https://twitter.com/" class="rrss"><i class="fa-brands fa-twitter"></i></a></li>
-                    <li><a href="https://www.instagram.com/" class="rrss"><i class="fa-brands fa-instagram"></i></a></li>
-                  </ul>
-                </div>
-            </nav>
-            <nav class="overlay2 footer-mobile">
-                <ul class="nav ">
-                    <li class="items-footer">
-                      <i class="fa-solid fa-file-invoice-dollar"></i>
-                      <a class="nav-link font" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="items-footer separation">
-                      <i class="fa-solid fa-right-left"></i>
-                      <a class="nav-link font" href="#">Transfer</a>
-                    </li>
-                    <li class="items-footer separation text-center">
-                      <i class="fa-solid fa-qrcode"></i>
-                      <a class="nav-link font" href="#">QR</a>
-                    </li>
-                    <li class="items-footer separation">
-                      <i class="fa-solid fa-file-invoice-dollar"></i>
-                      <a class="nav-link font">Accounts</a>
-                    </li>
-                    <li class="items-footer separation">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                        <a class="nav-link font">Emergency</a>
-                      </li>
-                  </ul>
-            </nav>
-        </footer>
+                 </div>
+              </li>
+              
+            </ul>
+      </nav>
+      </footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

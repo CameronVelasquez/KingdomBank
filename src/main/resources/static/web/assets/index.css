@@ -268,6 +268,9 @@ input {
     height: 40px;
     width: 40px;
 }
+.baseIcons{
+    color: #333 !important;
+}
 
 footer {
     background-color: #2222224d;

@@ -24,6 +24,19 @@
     width: 100%;
 	
 }
+.overlayB{
+  background: #b69fa4 ;
+	background: -webkit-linear-gradient(to right, #312725, #b69fa4);
+	background: linear-gradient(to right, #312725, #b69fa4);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 0;
+	color: #FFFFF0 !important;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    text-decoration: none !important;
+}
 
 /* GLOBAL STYLE */
 * {
@@ -34,7 +47,7 @@
 body {
   background-image: url(./img/bgimg.jpg) !important;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
 	font-family: 'Montserrat', sans-serif !important;
 }
 
@@ -44,8 +57,8 @@ body {
   background-image: url(./img/bgimg.jpg) !important;
   background-position: center;
   background-size: cover;
-	padding: 10px;
-    width: 100%;
+  width: 100%;
+    
 }
 
 .navbarNav {
@@ -55,6 +68,11 @@ body {
 .nav-link {
 	color: #000000 !important;
 }
+
+.welcomeClx{
+  text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.56);
+}
+
 .link-hover:hover{
   color: var(--w-complement) !important;
 }
@@ -63,6 +81,7 @@ body {
   color: var(--r-contrast) !important;
 }
 /* FOOTER */
+
 .footer {
   width: 100%;
   position: relative;
@@ -198,18 +217,11 @@ h1{
 }
 main{
 	box-sizing: border-box !important;
-	/* background-color: var(--background) !important;
-  background-image: url(./img/bgimg.jpg);
-  background-blend-mode: overlay ;
-  background-position: center;
-  background-size: cover; */
   height: 100% !important;
-  
-  background-color: #E6E8E9;
+  background-color: #b8c1c6;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='287' height='287' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%238A8A8A' stroke-width='0.3' stroke-opacity='0.2'%3E%3Crect x='-40' y='40' width='75' height='75'/%3E%3Crect x='-35' y='45' width='65' height='65'/%3E%3Crect x='-30' y='50' width='55' height='55'/%3E%3Crect x='-25' y='55' width='45' height='45'/%3E%3Crect x='-20' y='60' width='35' height='35'/%3E%3Crect x='-15' y='65' width='25' height='25'/%3E%3Crect x='-10' y='70' width='15' height='15'/%3E%3Crect x='-5' y='75' width='5' height='5'/%3E%3Crect width='35' height='35'/%3E%3Crect x='5' y='5' width='25' height='25'/%3E%3Crect x='10' y='10' width='15' height='15'/%3E%3Crect x='15' y='15' width='5' height='5'/%3E%3Crect x='40' width='75' height='75'/%3E%3Crect x='45' y='5' width='65' height='65'/%3E%3Crect x='50' y='10' width='55' height='55'/%3E%3Crect x='55' y='15' width='45' height='45'/%3E%3Crect x='60' y='20' width='35' height='35'/%3E%3Crect x='65' y='25' width='25' height='25'/%3E%3Crect x='70' y='30' width='15' height='15'/%3E%3Crect x='75' y='35' width='5' height='5'/%3E%3Crect x='40' y='80' width='35' height='35'/%3E%3Crect x='45' y='85' width='25' height='25'/%3E%3Crect x='50' y='90' width='15' height='15'/%3E%3Crect x='55' y='95' width='5' height='5'/%3E%3Crect x='120' y='-40' width='75' height='75'/%3E%3Crect x='125' y='-35' width='65' height='65'/%3E%3Crect x='130' y='-30' width='55' height='55'/%3E%3Crect x='135' y='-25' width='45' height='45'/%3E%3Crect x='140' y='-20' width='35' height='35'/%3E%3Crect x='145' y='-15' width='25' height='25'/%3E%3Crect x='150' y='-10' width='15' height='15'/%3E%3Crect x='155' y='-5' width='5' height='5'/%3E%3Crect x='120' y='40' width='35' height='35'/%3E%3Crect x='125' y='45' width='25' height='25'/%3E%3Crect x='130' y='50' width='15' height='15'/%3E%3Crect x='135' y='55' width='5' height='5'/%3E%3Crect y='120' width='75' height='75'/%3E%3Crect x='5' y='125' width='65' height='65'/%3E%3Crect x='10' y='130' width='55' height='55'/%3E%3Crect x='15' y='135' width='45' height='45'/%3E%3Crect x='20' y='140' width='35' height='35'/%3E%3Crect x='25' y='145' width='25' height='25'/%3E%3Crect x='30' y='150' width='15' height='15'/%3E%3Crect x='35' y='155' width='5' height='5'/%3E%3Crect x='200' y='120' width='75' height='75'/%3E%3Crect x='40' y='200' width='75' height='75'/%3E%3Crect x='80' y='80' width='75' height='75'/%3E%3Crect x='85' y='85' width='65' height='65'/%3E%3Crect x='90' y='90' width='55' height='55'/%3E%3Crect x='95' y='95' width='45' height='45'/%3E%3Crect x='100' y='100' width='35' height='35'/%3E%3Crect x='105' y='105' width='25' height='25'/%3E%3Crect x='110' y='110' width='15' height='15'/%3E%3Crect x='115' y='115' width='5' height='5'/%3E%3Crect x='80' y='160' width='35' height='35'/%3E%3Crect x='85' y='165' width='25' height='25'/%3E%3Crect x='90' y='170' width='15' height='15'/%3E%3Crect x='95' y='175' width='5' height='5'/%3E%3Crect x='120' y='160' width='75' height='75'/%3E%3Crect x='125' y='165' width='65' height='65'/%3E%3Crect x='130' y='170' width='55' height='55'/%3E%3Crect x='135' y='175' width='45' height='45'/%3E%3Crect x='140' y='180' width='35' height='35'/%3E%3Crect x='145' y='185' width='25' height='25'/%3E%3Crect x='150' y='190' width='15' height='15'/%3E%3Crect x='155' y='195' width='5' height='5'/%3E%3Crect x='160' y='40' width='75' height='75'/%3E%3Crect x='165' y='45' width='65' height='65'/%3E%3Crect x='170' y='50' width='55' height='55'/%3E%3Crect x='175' y='55' width='45' height='45'/%3E%3Crect x='180' y='60' width='35' height='35'/%3E%3Crect x='185' y='65' width='25' height='25'/%3E%3Crect x='190' y='70' width='15' height='15'/%3E%3Crect x='195' y='75' width='5' height='5'/%3E%3Crect x='160' y='120' width='35' height='35'/%3E%3Crect x='165' y='125' width='25' height='25'/%3E%3Crect x='170' y='130' width='15' height='15'/%3E%3Crect x='175' y='135' width='5' height='5'/%3E%3Crect x='200' y='200' width='35' height='35'/%3E%3Crect x='200' width='35' height='35'/%3E%3Crect y='200' width='35' height='35'/%3E%3C/g%3E%3C/svg%3E");
-  
-  
 }
+
 
 .sidenav{
 	min-width: 20%;
@@ -223,13 +235,7 @@ main{
 .sidenav-header{
   text-align: center !important;
   background-color: transparent;
-  /* background-image: url(./img/bgimg.jpg);
-  background-repeat: no-repeat;
-	background-size: cover;
-	background-position: 0 0;
-	color: #FFFFF0 !important;
-    padding: 10px;
-    width: 100%; */
+ 
 }
 .sidebarNav>a:hover{
 	background-color: var(--w-complement) !important;
@@ -248,7 +254,13 @@ main{
 	color: var(--w-complement) !important;
 	
 }
-
+.visamodal{
+  background-image: url(./img/creditcards.png);
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(10px);
+  opacity: 80%;
+}
 .mail-anchord{
 	text-decoration: none !important;
 	color: #FFFFFF;
@@ -292,12 +304,92 @@ main{
 		
 	}
 
+  .carouselBanner{   
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0% !important;
+    padding: 0% !important;
+    right: 0% !important;
+    left: 0% !important;
+    bottom: 0% !important;
+    text-align: none !important;
+  }
+  .customBannerA{
+     background-color: #d83a3a !important;
+     clip-path: circle(55.0% at 0 51%);
+     height: 100%;
+     text-align: left;
+     font-size: 15px;
+     padding-top: 1rem;
+     padding-left: 5rem;
+  }
+  .customBannerB{
+    background-color: #d83a3a !important;
+     clip-path: circle(55.0% at 0 51%);
+     height: 100%;
+     text-align: left;
+     font-size: 15px;
+     padding-top: 1rem;
+     padding-left: 5rem;
+  }
+  .customBannerC{
+    background-color: #180e0e75 !important;
+    backdrop-filter: blur(5px);
+    clip-path: circle(55.0% at 0 51%);
+    height: 100%;
+     text-align: left;
+     font-size: 15px;
+     padding-top: 1rem;
+     padding-left: 5rem;
+  }
+  .carouselBannerC{
+    backdrop-filter: blur(7px);
+  }
+  .visa-gif{
+    position: absolute;
+    opacity: 50% !important;
+    right: 10%;
+    backdrop-filter: blur(10px);
+    
+  }
+  .customBannerD{
+    background-color: #2fa466fe !important;
+     clip-path: circle(55.0% at 0 51%);
+     height: 100%;
+     text-align: left;
+     font-size: 15px;
+     padding-top: 1rem;
+     padding-left: 5rem;
+  }
+  .customBannerE{
+    background-color: #d83a3a !important;
+     clip-path: circle(55.0% at 0 51%);
+     height: 100%;
+     text-align: left;
+     font-size: 15px;
+     padding-top: 1rem;
+     padding-left: 5rem;
+  }
+  .customBannerF{
+    background-color: #180e0e96 !important;
+    backdrop-filter: blur(10px);
+    clip-path: circle(55.0% at 0 51%);
+    height: 100%;
+     text-align: left;
+     font-size: 15px;
+     padding-top: 1rem;
+     padding-left: 5rem;
+  }
+  @media(min-width:991px)and(max-width:1439px){
+    .carouselBannerMain{
+      margin-bottom: 0% !important;
+      padding-bottom: 0% !important;
+    }
+  }
 /*
  MAIN
 advertise, accounts & cards
 */
-
-
 .aside-sidenav{
 	width: 100% !important;
 	padding: 1%;
@@ -375,7 +467,6 @@ z-index: 1000;
   display: inline-block;
     width: 320px;
     height: 190px;
-    /* background-color: linear-gradient(to right bottom, #fd696b, #fa616e, #f65871, #f15075, #ec4879) !important; /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -601,17 +692,7 @@ border-radius: 4px;
     padding: 5rem;
     padding-top: 2rem;
   }
-  .section-advertise{/* 
-    background-image: url(./img/automotive.png);
-    background-blend-mode: hard-light !important;
-    background-position: center;
-    background-size:cover;
-    background-repeat: no-repeat; */
-    width: 100%;
-    height: 80vh;
-  
-  }
-  
+
 	.welcome-toggler{
 		display: none !important;
 	}
@@ -670,6 +751,11 @@ border-radius: 4px;
   .table-transactions{
     font-size: 10px ;
   }
+  .section-advertise{
+    display: none !important;
+  
+  }
+  
 }
 @media(max-width:634px){
 	.card-button{
@@ -689,13 +775,10 @@ border-radius: 4px;
   .font {
     font-size: 8px !important;
     color: var(--w-complement) !important;
-  }
-  
+  } 
 }
-@media(min-width:493px)and(max-width:990px){
-  
+@media(min-width:493px)and(max-width:990px){ 
 }
-
 /* ACCOUNT */
 .section-table{
 	width: 100%;
@@ -706,5 +789,57 @@ border-radius: 4px;
 }
 .table{
 	width: 100%;
+}
+
+
+.mobileBannerText{
+  font-size: 70% ;
+  width: 30% ;
+}
+ulBannerText{
+  font-size: 13px;
+}
+@media(min-width:1650px){
+  .mobileBannerText{
+    font-size: 90% ;
+  }
+  .bannerTextTitle{
+    font-size: 200%;
+  }
+}
+@media(max-width:1041px){
+  .carouselBannerMain{
+    display: none !important;
+  }
+}
+@media(max-width:1404px){
+  .mobileBannerText{
+    font-size: 50% ;
+  }
+  .bannerTextTitle{
+    font-size: 200%;
+  }
+}
+@media(min-width:991px)and(max-width:1277px){
+  .mobileBannerText{
+    font-size: 30%;
+  }
+  .ulBannerText{
+    font-size: 13px;
+  }
+  .bannerTextTitle{
+    font-size: 30%;
+  }
+  .bannerTextTitleh6{
+    font-size: 10px !important;
+  }
+}
+@media(max-width:1123px){
+  .mobileBannerText>a{
+    display: none !important;
+  }
+  .bannerTextTitleGreen{
+    display: none !important;
+  }
 }
 

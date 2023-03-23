@@ -78,6 +78,7 @@
                 </div>
             </section>
             
+            
             <h2 class="text-light main-text desktop">Welcome to our bank, Sign In or Register below.</h2>
            <div class="container desktop" id="container">
                <div class="form-container sign-up-container">
@@ -91,23 +92,33 @@
             </form>
         </div>
         <div class="form-container sign-in-container">
+          
             <form @submit.prevent class=" d-flex flex-column gap-3">
                 <h1>Sign in</h1>
                 <input v-model="email" type="email" placeholder="Email" />
                 <input v-model="password" type="password" placeholder="Password" />
-                <!-- <a href="#">Forgot your password?</a> -->
                 <button @click="login">Sign In</button>
+                <div class="d-flex gap-5">
+                  <a href="http://fb.com"><i class="fa-brands fa-facebook baseIcons"></i></a>
+                  <a href="http://twitter.com"><i class="fa-brands fa-twitter baseIcons"></i></a>
+                  <a href="http://tiktok.com"><i class="fa-brands fa-tiktok baseIcons"></i></a>
+                </div>
             </form>
+            
         </div>
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
                     <h1>Welcome Back!</h1>
+                    <p style="font-size: 12px;">At Kingdom Bank, we are committed to providing our customers with exceptional service, innovative products, and competitive rates. Whether you are opening your first account with us or have been a loyal customer for years, we are dedicated to making your banking experience as easy and convenient as possible.</p>
                     <p>To keep connected with us please login with your personal info</p>
                     <button class="ghost" id="signIn">Sign In</button>
                 </div>
                 <div class="overlay-panel overlay-right">
+                  
+                  <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_vWhFpWi9X5.json" mode="bounce" background="rgba(0, 0, 0, 0)"  speed="1"  style="width: 300px; height: 50px;"  loop autoplay></lottie-player>
                     <h1>Hello, Friend!</h1>
+                    <p>We are thrilled to have you join our family of customers and look forward to serving all of your banking needs.</p>
                     <p>Enter your personal details and start journey with us</p>
                     <button class="ghost" id="signUp">Sign Up</button>
                 </div>
@@ -126,6 +137,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./js/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script>
         const signUpButton = document.getElementById('signUp');
 const signInButton = document.getElementById('signIn');

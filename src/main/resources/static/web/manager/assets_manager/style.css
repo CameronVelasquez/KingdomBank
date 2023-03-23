@@ -48,6 +48,18 @@ p {
 	text-transform: uppercase !important;
 	transition: transform 80ms ease-in !important;
 }
+.buttonB {
+	border-radius: 20px !important;
+	border: 1px solid tan;
+	background-color: tan;
+	color: #FFFFFF;
+	font-size: 12px !important;
+	font-weight: bold !important;
+	padding: 12px 45px !important;
+	letter-spacing: 1px !important;
+	text-transform: uppercase !important;
+	transition: transform 80ms ease-in !important;
+}
 .button:active {
 	transform: scale(0.95) !important;
 }

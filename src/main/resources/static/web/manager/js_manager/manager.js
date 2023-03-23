@@ -19,17 +19,17 @@ createApp({
 
     methods: {
         loadData() {
-            axios.get("http://localhost:8080/clients")
+            axios.get("http://localhost:8080/api/clients")
             .then(response => {
             this.data = response,
-            this.objectClients = this.data.data._embedded.clients
+            this.objectClients = this.data.data
             
             })
             .catch(err => console.log(err))
         },
         addClient(){
             if (this.validateMail()){
-                axios.post("http://localhost:8080/clients", this.newClient)
+                axios.post("http://localhost:8080/rest/clients", this.newClient)
             .then( response => {
                 this.loadData(),
                 this.refreshForm()
@@ -43,11 +43,14 @@ createApp({
             return /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)$/.test(this.newClient.email)
         },
         deleteClient(client) {
-            axios.delete(client._links.client.href)
+            axios.delete("/rest/clients")
             .then(response =>{
                 this.loadData()
                 
                 
+            })
+            .catch(error => {
+                console.log(error)
             })
         }
    

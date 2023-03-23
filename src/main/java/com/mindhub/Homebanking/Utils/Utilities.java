@@ -2,14 +2,11 @@ package com.mindhub.Homebanking.Utils;
 
 import com.mindhub.Homebanking.Models.Account;
 import com.mindhub.Homebanking.Models.Loan;
-import com.mindhub.Homebanking.Repositories.AccountRepository;
-import com.mindhub.Homebanking.Repositories.CardRepository;
-import com.mindhub.Homebanking.Repositories.LoanRepository;
-
-import java.util.List;
+import com.mindhub.Homebanking.Services.AccountServices;
+import com.mindhub.Homebanking.Services.CardServices;
 
 public class Utilities {
-    //preguntar mas tarde a Fede sobre el cardRepository
+
     public static String cvv() {
         int cvvGen = (int) (Math.random() * 999);
         String cvvGenCompletado = String.format("%03d", cvvGen);
@@ -28,10 +25,10 @@ public class Utilities {
         String cardNumberString = "4" + number1+"-"+number2+"-"+number3+"-"+number4;
         return cardNumberString;
     }
-    public static   String randomNumberCard(CardRepository cardRepository){
+    public static   String randomNumberCard(CardServices cardServices){
         String generatedNumber;
         generatedNumber = randomString();
-        if(cardRepository.existsCardByNumber(generatedNumber) ){
+        if(cardServices.existCardByNumber(generatedNumber) ){
             return generatedNumber = randomString();
         }
         else{
@@ -44,13 +41,13 @@ public class Utilities {
         String number = "VIN-"+number1;//VIN-46877988
         return number;
     }
-    public static String accountNumber(AccountRepository accountRepo){
+    public static String accountNumber(AccountServices accountServices){
 
         String Number;
         boolean verifyNumber;
         do {
             Number = GenerateNumber();
-            verifyNumber = accountRepo.existsByNumber(Number);
+            verifyNumber = accountServices.existByNumber(Number);
         } while (verifyNumber);
 
         return Number;
@@ -60,14 +57,14 @@ public class Utilities {
         Double amountPlusFees = amount * fee;
         return amountPlusFees;
     }
-    public static Double currentBalanceCredit(AccountRepository accountRepository, Account account, double amount){
-        Double getCurrentAmount = accountRepository.findByNumber(account.getNumber()).getBalance() + amount;
+    public static Double currentBalanceCredit(AccountServices accountServices, Account account, double amount){
+        Double getCurrentAmount = accountServices.findByNumber(account.getNumber()).getBalance() + amount;
 
         return getCurrentAmount;
 
     }
-    public static Double currentBalanceDebit(AccountRepository accountRepository, Account account, double amount){
-        Double getCurrentAmount = accountRepository.findByNumber(account.getNumber()).getBalance() - amount;
+    public static Double currentBalanceDebit(AccountServices accountServices, Account account, double amount){
+        Double getCurrentAmount = accountServices.findByNumber(account.getNumber()).getBalance() - amount;
 
         return getCurrentAmount;
 

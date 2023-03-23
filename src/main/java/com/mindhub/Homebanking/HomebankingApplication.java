@@ -7,18 +7,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
-
-import static com.mindhub.Homebanking.Utils.Utilities.*;
+import java.util.stream.Collectors;
 
 
 @SpringBootApplication
 public class HomebankingApplication {
+
 //	@Autowired
 //	private PasswordEncoder passwordEncoder;
 	public static void main(String[] args) { SpringApplication.run(HomebankingApplication.class, args);	}
@@ -27,6 +23,8 @@ public class HomebankingApplication {
 //	@Bean
 //	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository, CardRepository cardRepository) {
 //		return (args) -> {
+//
+//
 //			LocalDateTime now = LocalDateTime.now();
 //			LocalDateTime nextDay = now.plusDays(1);
 //			LocalDateTime yesterday = now.minusDays(1);

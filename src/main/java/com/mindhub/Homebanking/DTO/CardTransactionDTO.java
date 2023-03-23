@@ -1,6 +1,6 @@
 package com.mindhub.Homebanking.DTO;
 
-import java.time.LocalDate;
+
 
 public class CardTransactionDTO {
     private Long id;
@@ -8,16 +8,18 @@ public class CardTransactionDTO {
     private String cvv;
     private Double amount;
     private String description;
-    private LocalDate thruDate;
+    private Short thruDateYear;
+    private String thruDateMonth;
 
     public CardTransactionDTO(){};
-    public CardTransactionDTO(Long id, String number, String cvv, Double amount, String description, LocalDate thruDate) {
+    public CardTransactionDTO(Long id, String number, String cvv, Double amount, String description, Short thruDateYear, String thruDateMonth) {
         this.id = id;
         this.number = number;
         this.cvv = cvv;
         this.amount = amount;
         this.description = description;
-        this.thruDate = thruDate;
+        this.thruDateYear = thruDateYear;
+        this.thruDateMonth = thruDateMonth;
     }
 
     public Long getId() {
@@ -40,7 +42,11 @@ public class CardTransactionDTO {
         return description;
     }
 
-    public LocalDate getThruDate() {
-        return thruDate;
+    public Short getThruDateYear() {
+        return thruDateYear;
+    }
+
+    public String getThruDateMonth() {
+        return thruDateMonth;
     }
 }
