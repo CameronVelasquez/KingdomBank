@@ -22,10 +22,11 @@ public class Card {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id")
     private Client client;
+    private Boolean showCard;
 
     public Card(){};
 
-    public Card(CardType type, CardColor color, Client client, String cvv, String number, LocalDate fromDate, LocalDate thruDate) {
+    public Card(CardType type, CardColor color, Client client, String cvv, String number, LocalDate fromDate, LocalDate thruDate, Boolean showCard) {
         this.type = type;
         this.color = color;
         this.cardholder = client.getFirstName() + " " + client.getLastName() ; //nombre concat
@@ -34,6 +35,7 @@ public class Card {
         this.fromDate = fromDate;
         this.thruDate = thruDate;
         this.client = client;
+        this.showCard = showCard;
     }
 
     public Long getId() {
@@ -105,5 +107,11 @@ public class Card {
         this.client = client;
     }
 
+    public Boolean getShowCard() {
+        return showCard;
+    }
 
+    public void setShowCard(Boolean showCard) {
+        this.showCard = showCard;
+    }
 }

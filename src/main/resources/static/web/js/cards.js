@@ -9,7 +9,8 @@ createApp({
             loans: [],
             cards: [],
             transactionId: "",
-            currentCardDate: undefined,          
+            currentCardDate: undefined,
+            number: "",          
         }
 
 	},
@@ -27,6 +28,7 @@ createApp({
                    this.loans = this.objectClient.loans
                    this.cards = this.objectClient.cards
                    this.transactionId = this.accounts[0].id
+                   console.log(this.cards)
                    
                    
                 })
@@ -39,14 +41,57 @@ createApp({
         logOut(){
             axios.post("/api/logout")
             .then( response => {
-                location.href = "/web/index.html"
+                Swal.fire({
+                    icon: 'success',
+                    title: `Successfully Log out!`, 
+                    text: `${response.status}: OK`,
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+                .then(response => {
+                    location.href = "/web/index.html"
+                })
             })
             .catch(error => console.log(error))
         },
         /* Delete Cards */
-        numberData(){
+        deleteCards(){
             console.log(this.number) 
+            axios.patch("/api/clients/current/cards", `number=${this.number}`, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+                })
+            .then(response => {
+                Swal.fire({
+                    icon: 'success',
+                    title: `${response.data}`, 
+                    text: `${response.status}: OK`,
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+                .then(response => {
+                    window.location.href = '/web/cards.html'; this.loadData()
+                })
+            })
+            
         },
+        alertDeleteCard(){
+            Swal.fire({
+                title: 'Are you sure you want to delete this card?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#FF4B2B',
+                confirmButtonText: 'Confirm'
+            }).then((response) => {
+                if (response.isConfirmed) {
+                    this.deleteCards();
+            }
+            })
+        },
+
         
         /* Expired Cards */
         currentDate(){

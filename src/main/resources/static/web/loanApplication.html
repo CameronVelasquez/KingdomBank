@@ -28,17 +28,17 @@
             <div class="cardTransfer-body card-body d-flex flex-column gap-4">
                 <div  class="mobileSelect">
                     <p class="selectTitles">Select Loan:</p>
-                    <select @change="changed" v-model="loanId" title="Open this select menu" class="form-select selectAccountwidth" aria-label="Default select example" >
+                    <select @change="changed" v-model="loanId"  class="form-select selectAccountwidth" aria-label="Default select example" >
                         <option value="" disabled selected>Select Loan option</option>
-                        <option v-for="loan of loans" :value="loan.id">{{loan.name}}</option>
+                        <option v-for="loan of loans" :value="loan.id">{{loan.name}}  <p class="fee m-0 danger">(plus fee: %{{feePercentage(loan.fee)}})</p></option>
                     </select>
                   </div>   
               <!-- second request -->
               <div class="mobileSelect">
                 <p class="selectTitles">Payments:</p>
-                <select v-model="paymentSelected" title="Open this select menu" class="form-select selectAccountwidth" aria-label="Default select example" >
+                <select @change="changed" v-model="paymentSelected" title="Open this select menu" class="form-select selectAccountwidth" aria-label="Default select example" >
                     <option value="" disabled selected>Select payment option</option>
-                    <option v-for="payment of listOfPayments" :value="payment" >{{payment}}</option>
+                    <option v-for="payment of listOfPayments" :value="payment" >{{payment}} (plus fee: {{paymentsFee(payment)}})</option>
                 </select>
                 <p class="selectTitles">destiny account:</p>
                 <select v-model="accountNumber" title="Open this select menu" class="form-select selectAccountwidth" aria-label="Default select example" >
@@ -51,8 +51,10 @@
              </form>
              <section  class="p-0 m-0">
                 <h4 class="monthlyPayment">Monthly amount to pay:</h4>
-                <h4 class="monthlyPayment" v-if="amountSelected != null">USD {{monthlyPayments()}}</h4>
+                <h4 class="monthlyPayment d-flex justify-content-center align-items-center" v-if="amountSelected != null">USD {{monthlyPayments()}}</h4>
                 <h4 class="monthlyPayment" v-else>USD 0.00</h4>
+                
+                
              </section>
             </div>
             <div class="card-footer text-muted ">

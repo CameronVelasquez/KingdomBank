@@ -8,9 +8,10 @@ import java.time.LocalDateTime;
 public class TransactionDTO {
     private Long id;
     private TransactionType type;
-    private double amount;
+    private Double amount;
     private String description;
     private LocalDateTime date;
+    private Double showCurrentBalance;
     public TransactionDTO(){}
 
     public TransactionDTO(Transaction transaction) {
@@ -19,6 +20,7 @@ public class TransactionDTO {
         this.amount = transaction.getAmount();
         this.description = transaction.getDescription();
         this.date = transaction.getDate();
+        this.showCurrentBalance = transaction.getShowCurrentBalance();
     }
 
     public Long getId() {
@@ -29,7 +31,7 @@ public class TransactionDTO {
         return type;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
@@ -39,5 +41,9 @@ public class TransactionDTO {
 
     public LocalDateTime getDate() {
         return date;
+    }
+
+    public Double getShowCurrentBalance() {
+        return showCurrentBalance;
     }
 }

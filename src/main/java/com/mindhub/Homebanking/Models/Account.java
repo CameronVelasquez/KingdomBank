@@ -18,7 +18,10 @@ public class Account {
     private String number;
     private LocalDateTime creationDate;
     private double balance;
-    @ManyToOne(fetch = FetchType.EAGER)
+    private Boolean showAccount;
+
+    private AccountType accountType;
+    @ManyToOne(fetch = FetchType.EAGER) //tx clx c cta
     @JoinColumn(name="client_id")
     private Client client;
     @OneToMany(mappedBy="account", fetch=FetchType.EAGER)
@@ -26,10 +29,12 @@ public class Account {
 
     public Account(){}
 
-    public Account(String num, LocalDateTime creationD, double balance){
+    public Account(String num, LocalDateTime creationD, double balance, Boolean showAccount, AccountType accountType){
         this.number = num;
         this.creationDate = creationD;
         this.balance = balance;
+        this.showAccount = showAccount;
+        this.accountType = accountType;
     }
 
     public Long getId() {
@@ -59,13 +64,28 @@ public class Account {
         this.balance = balance;
     }
 
-    @JsonIgnore
     public Client getClient() {
         return client;
     }
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public Boolean getShowAccount() {
+        return showAccount;
+    }
+
+    public void setShowAccount(Boolean showAccount) {
+        this.showAccount = showAccount;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
     public Set<Transaction> getTransactions() {

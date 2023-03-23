@@ -13,20 +13,23 @@ public class Transaction {
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
     private TransactionType type;
-    private double amount;
+    private Double amount;
     private String description;
     private LocalDateTime date;
+    private Double showCurrentBalance;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="account_id")
     private Account account;
 
 
     public Transaction(){}
-    public Transaction(TransactionType type, double amount, String description, LocalDateTime date) {
+    public Transaction(TransactionType type, Double amount, String description, LocalDateTime date, Double showCurrentBalance) {
         this.type = type;
         this.amount = amount;
         this.description = description;
         this.date = date;
+        this.showCurrentBalance = showCurrentBalance;
     }
 
     public Long getId() {
@@ -41,11 +44,11 @@ public class Transaction {
         this.type = type;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
@@ -71,5 +74,14 @@ public class Transaction {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+
+    public Double getShowCurrentBalance() {
+        return showCurrentBalance;
+    }
+
+    public void setShowCurrentBalance(Double showCurrentBalance) {
+        this.showCurrentBalance = showCurrentBalance;
     }
 }

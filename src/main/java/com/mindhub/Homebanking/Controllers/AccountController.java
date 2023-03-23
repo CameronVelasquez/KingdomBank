@@ -1,20 +1,14 @@
 package com.mindhub.Homebanking.Controllers;
 
 import com.mindhub.Homebanking.DTO.AccountDTO;
-import com.mindhub.Homebanking.DTO.CardDTO;
-import com.mindhub.Homebanking.DTO.ClientDTO;
-import com.mindhub.Homebanking.Models.Account;
-import com.mindhub.Homebanking.Models.Client;
-import com.mindhub.Homebanking.Repositories.AccountRepository;
-import com.mindhub.Homebanking.Repositories.ClientRepository;
+import com.mindhub.Homebanking.Models.*;
+import com.mindhub.Homebanking.Services.AccountServices;
+import com.mindhub.Homebanking.Services.ClientServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,37 +21,88 @@ import static java.util.stream.Collectors.toList;
 public class AccountController {
 
     @Autowired
-    private AccountRepository accountRepository;
+    AccountServices accountServices;
     @Autowired
-    private ClientRepository clientRepository;
+    ClientServices clientServices;
 
-    @RequestMapping("/api/accounts")
+    @GetMapping("/api/accounts")
     public List<AccountDTO> getAccounts(){
-        return accountRepository.findAll().stream().map(AccountDTO::new).collect(toList());
+        return accountServices.findAll().stream().map(AccountDTO::new).collect(toList());
     }
 
-    @RequestMapping("/api/accounts/{id}")
+    @GetMapping("/api/accounts/{id}")
     public AccountDTO getAccount(@PathVariable Long id){
-        return new AccountDTO(accountRepository.findById(id).orElse(null));
+        return new AccountDTO(accountServices.findById(id));
     }
-    @RequestMapping(path = "/api/clients/current/accounts", method = RequestMethod.POST)
-        public ResponseEntity<Object> createAccounts (Authentication authentication){
 
-        Client clientAuthenticated = clientRepository.findByEmail(authentication.getName());
+    @PostMapping("/api/clients/current/accounts")
+    public ResponseEntity<Object> createAccounts (Authentication authentication, @RequestParam (required = false) AccountType accountType){
 
-        if( clientAuthenticated.getAccounts().size() >= 3 ){
+        Client clientAuthenticated = clientServices.findByEmail(authentication.getName());
+
+        if( clientAuthenticated.getAccounts().size() >= 3 && clientAuthenticated.getAccounts().stream().allMatch(account -> account.getShowAccount() == true)){
             return new ResponseEntity<>("No more accounts allowed", HttpStatus.FORBIDDEN);
         }
+        if (accountType == null){
+            return new ResponseEntity<>("Account type field is empty", HttpStatus.BAD_REQUEST); }
 
-        Account newAccount = new Account(accountNumber(accountRepository) ,LocalDateTime.now(), 0);
+        Account newAccount = new Account(accountNumber(accountServices) ,LocalDateTime.now(), 0, true, accountType);
         clientAuthenticated.addAccount(newAccount);
-        accountRepository.save(newAccount);
+        accountServices.save(newAccount);
         return new ResponseEntity<>("Account successfully created", HttpStatus.CREATED);
     }
 
-    @RequestMapping("api/clients/current/accounts")
+    @GetMapping("api/clients/current/accounts")
     public List<AccountDTO> getCurrentAccounts(Authentication authentication){
-        return clientRepository.findByEmail(authentication.getName()).getAccounts().stream().map(account -> new AccountDTO(account)).collect(toList());
+        Client client = clientServices.findByEmail(authentication.getName());
+        List<Account> visibleAccounts = client.getAccounts().stream().filter(card -> card.getShowAccount() == true).collect(Collectors.toList());
+        return visibleAccounts.stream().map(account -> new AccountDTO(account)).collect(toList());
+    }
+    @PatchMapping("/api/clients/current/accounts")
+    public ResponseEntity<Object> deleteAccounts (Authentication authentication,
+                                               @RequestParam String accountNumber,
+                                               @RequestParam String accountDestiny){
+
+        Client authenticatedClient = clientServices.findByEmail(authentication.getName());
+        Account accountToDelete = accountServices.findByNumber(accountNumber);
+        Account accountDestini = accountServices.findByNumber(accountDestiny);
+
+
+        if (accountNumber.isEmpty()){
+            return new ResponseEntity<>("Account number is empty",HttpStatus.BAD_REQUEST);
+        }
+        if (accountDestiny.isEmpty()){
+            return new ResponseEntity<>("Account destiny is empty",HttpStatus.BAD_REQUEST);
+        }
+        if (accountToDelete == accountDestini){
+            return new ResponseEntity<>("Account number and account destiny are the same",HttpStatus.BAD_REQUEST);
+        }
+        if (authenticatedClient.getAccounts().size() < 2){
+            return new ResponseEntity<>("You need another account to delete one account",HttpStatus.FORBIDDEN);
+        }
+        if (accountToDelete == null){
+            return new ResponseEntity<>("The account number doesn't exist",HttpStatus.BAD_REQUEST);
+        }
+        if (!authenticatedClient.getAccounts().contains(accountToDelete)){
+            return new ResponseEntity<>("This account number does not belong to your accounts",HttpStatus.FORBIDDEN);
+        }
+        if (accountDestini == null){
+            return new ResponseEntity<>("The account destiny doesn't exist", HttpStatus.BAD_REQUEST);
+        }
+        if (!authenticatedClient.getAccounts().contains(accountDestini)){
+            return new ResponseEntity<>("This account destiny does not belong to your accounts",HttpStatus.FORBIDDEN);
+        }
+        if (accountToDelete.getShowAccount() == false || accountDestini.getShowAccount() == false){
+            return new ResponseEntity<>("The account is already deleted",HttpStatus.BAD_REQUEST);
+        }
+
+        accountDestini.setBalance(accountDestini.getBalance()+accountToDelete.getBalance());
+        accountToDelete.setBalance(0);
+        accountToDelete.setShowAccount(false);
+        accountServices.save(accountToDelete);
+        accountServices.save(accountDestini);
+
+        return new ResponseEntity<>("Successfully deleted", HttpStatus.ACCEPTED);
     }
 
 }

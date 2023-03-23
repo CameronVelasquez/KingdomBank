@@ -12,19 +12,21 @@ import java.util.stream.Collectors;
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native") //AUTO
+    @GenericGenerator(name = "native", strategy = "native") //nativ BD
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
-    @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
+
+    private String password;
+    @OneToMany(mappedBy="client", fetch=FetchType.EAGER) //clx x tx ctas
     private Set<Account> accounts = new HashSet<>();
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<ClientLoan> clientLoans = new HashSet<>();
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
     private Set<Card> cards = new HashSet<>();
-    private String password;
+
 
     public Client () { };
 

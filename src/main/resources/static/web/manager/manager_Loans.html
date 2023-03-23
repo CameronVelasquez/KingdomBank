@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets_manager/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Sign In</title>
+
+
+    <!-- FONT AWESOME --> 
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" /> -->
+    <script src="https://kit.fontawesome.com/0a7fe4ea11.js" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+    <main id="app" class="d-flex main">
+        <div class="form-container add-client-container">
+		    <form @submit.prevent id="resetForm" >
+			    <h1>Create Loan</h1>			
+			    <input v-model="name" type="text" placeholder="Loan Name">
+			    <input v-model="maxAmount" type="text" placeholder="maxAmount">
+			    <input @change="change" v-model="payments" type="text" placeholder="Payments. EJ::: 12,24,36" />
+                <p>Just integer number, separated by a comma. No spaces between.</p>
+                <input v-model="fee" type="text" placeholder="fee. EJ::: 1.5">
+                <p>Just one decimal. EJ: 1.5, refers to %50.</p>
+                <input @change="change" v-model="feePayments" type="text" placeholder="PaymentFees. EJ::: 1.1,1.2,1.3">
+                <p>Just one decimal with point. Each, separated by a comma. No spaces between.</p>
+			    <button class="button" @click="addLoan">Add Loan</button>
+                <br>
+                <button class="button buttonB " @click="logOut">Log Out</button>
+		    </form>
+            <div class="overlay2-container">
+                <div class="overlay2">
+                    <table class="table">
+                        <h2 class="d-flex">Client List</h2>
+                        
+                        <thead>
+                            <th>Loan Name</th>
+                            <th>Max Amount</th>
+                            <th>Extra Fee</th>
+                        </thead>
+                        <tbody v-for="loan of objectLoans">
+                            <tr>
+                                <td>{{loan.name}}</td>
+                                <td>{{loan.maxAmount}}</td>
+                                <td>{{feeAsPercentage(loan.fee)}}</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+	    </div>
+	    <div class="overlay-container">
+		    <div class="overlay">
+			    <div class="overlay-panel overlay-right">
+				    <h2>Client REST response</h2>
+				    <pre>{{objectLoans}}</pre>
+			    </div>
+		    </div>
+	    </div>
+        
+        
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js_manager/manager_Loans.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>

@@ -19,18 +19,27 @@ public class Loan {
 
     private String name;
     private double maxAmount;
+    private Double fee;
+    private Boolean showLoan;
+    @ElementCollection
+    @Column(name = "payment_fees")
+    private List<Double> paymentFees = new ArrayList<>();
     @ElementCollection
     @Column(name = "payment")
     private List<Integer> payments = new ArrayList<>();
+
     @OneToMany(mappedBy = "loan", fetch = FetchType.EAGER)
     private Set<ClientLoan> clientLoans = new HashSet<>();
 
     public Loan(){};
 
-    public Loan(String name, double maxAmount, List<Integer> payments) {
+    public Loan(String name, double maxAmount, List<Integer> payments, Double fee, List<Double> paymentFees, Boolean showLoan) {
         this.name = name;
         this.maxAmount = maxAmount;
         this.payments = payments;
+        this.fee = fee;
+        this.paymentFees = paymentFees;
+        this.showLoan = showLoan;
     }
 
     public Long getId() {
@@ -59,6 +68,30 @@ public class Loan {
 
     public void setPayments(List<Integer> payments) {
         this.payments = payments;
+    }
+
+    public Double getFee() {
+        return fee;
+    }
+
+    public void setFee(Double fee) {
+        this.fee = fee;
+    }
+
+    public List<Double> getPaymentFees() {
+        return paymentFees;
+    }
+
+    public void setPaymentFees(List<Double> paymentFees) {
+        this.paymentFees = paymentFees;
+    }
+
+    public Boolean getShowLoan() {
+        return showLoan;
+    }
+
+    public void setShowLoan(Boolean showLoan) {
+        this.showLoan = showLoan;
     }
 
     public Set<ClientLoan> getClientLoans() {
