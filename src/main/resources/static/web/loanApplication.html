@@ -30,7 +30,7 @@
                     <p class="selectTitles">Select Loan:</p>
                     <select @change="changed" v-model="loanId"  class="form-select selectAccountwidth" aria-label="Default select example" >
                         <option value="" disabled selected>Select Loan option</option>
-                        <option v-for="loan of loans" :value="loan.id">{{loan.name}}  <p class="fee m-0 danger">(plus fee: %{{feePercentage(loan.fee)}})</p></option>
+                        <option v-for="loan of loans" :value="loan.id">{{loan.name}} - plus %{{feePercentage(loan.fee)}} fee / maxAmount: USD{{loan.maxAmount.toFixed(2)}}</option>
                     </select>
                   </div>   
               <!-- second request -->
@@ -39,6 +39,7 @@
                 <select @change="changed" v-model="paymentSelected" title="Open this select menu" class="form-select selectAccountwidth" aria-label="Default select example" >
                     <option value="" disabled selected>Select payment option</option>
                     <option v-for="payment of listOfPayments" :value="payment" >{{payment}} (plus fee: {{paymentsFee(payment)}})</option>
+                    
                 </select>
                 <p class="selectTitles">destiny account:</p>
                 <select v-model="accountNumber" title="Open this select menu" class="form-select selectAccountwidth" aria-label="Default select example" >

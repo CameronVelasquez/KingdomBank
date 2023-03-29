@@ -22,7 +22,7 @@
 			    <h1>Create Loan</h1>			
 			    <input v-model="name" type="text" placeholder="Loan Name">
 			    <input v-model="maxAmount" type="text" placeholder="maxAmount">
-			    <input @change="change" v-model="payments" type="text" placeholder="Payments. EJ::: 12,24,36" />
+			    <input @change="feePayments.toFixed(1)" v-model="payments" type="text" placeholder="Payments. EJ::: 12,24,36" />
                 <p>Just integer number, separated by a comma. No spaces between.</p>
                 <input v-model="fee" type="text" placeholder="fee. EJ::: 1.5">
                 <p>Just one decimal. EJ: 1.5, refers to %50.</p>

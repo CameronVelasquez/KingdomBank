@@ -10,7 +10,8 @@ createApp({
             cards: [],
             transactionId: "",
             currentCardDate: undefined,
-            number: "",          
+            number: "", 
+            showCard: false         
         }
 
 	},
@@ -100,9 +101,12 @@ createApp({
             let month = date.split('-')[1]
             let year = date.split('-')[2]
             return this.currentCardDate = year + '-' + month + '-' + day
+        },
+        toggleCard() {
+            this.showCard = !this.showCard;
         }
         
         
-    }
+    },
 	
 }).mount('#app')
