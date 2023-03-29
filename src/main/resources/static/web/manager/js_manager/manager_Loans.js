@@ -32,14 +32,14 @@ createApp({
         },
         change(){ 
             this.paymentFeesListToSplit = [this.feePayments.split(",")][0]
-            console.log(this.paymentFeesListToSplit)
+            console.log([this.feePayments])
 
         },
         addLoan(){
-            this.paymentsListToSplit = this.payments.split(",")
-            this.paymentFeesListToSplit = this.feePayments.split(",")
+            this.paymentsListToSplit = this.payments.split(",")/* 
+            this.paymentFeesListToSplit = this.feePayments.split(",") */
             console.log(this.paymentFeesListToSplit)
-            axios.post("/api/admin/loans", {name:this.name, maxAmount:this.maxAmount, payments:this.paymentsListToSplit, fee:this.fee, feePayments:this.paymentFeesListToSplit}, {
+            axios.post("/api/admin/loans", {name:this.name, maxAmount:this.maxAmount, payments:this.paymentsListToSplit, fee:this.fee, feePayments:[this.feePayments]}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }

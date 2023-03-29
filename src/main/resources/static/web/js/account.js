@@ -45,6 +45,8 @@ createApp({
                    this.accounts = this.objectClient.accounts
                    this.loans = this.objectClient.loans
                    this.transactionId = this.accounts[0].id
+                   
+                   
         
                 })
                 .catch(error => console.log(error))
@@ -56,7 +58,8 @@ createApp({
                 this.dataAccounts = response.data
                 this.objectAccount = this.dataAccounts.find(account => account.id)
                 this.accountNumber = this.objectAccount.number
-                this.transactions = this.objectAccount.transactions
+                this.transactions = this.objectAccount.transactions.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                console.log(this.transactions +"hola")
                
             
                 /* this.loadTransactions() */

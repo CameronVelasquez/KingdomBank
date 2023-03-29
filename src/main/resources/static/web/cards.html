@@ -62,7 +62,7 @@
             </div>                
             <nav class="nav flex-column sidebarNav sidenav-body">
               
-              <a class="nav-link" href="#">Accounts Page</a>
+              <a class="nav-link" href="./accounts.html">Accounts Page</a>
               <a class="nav-link" href="./transfers.html">Transfer Money</a>
               <a class="nav-link" href="./loanApplication.html">Apply Loan</a>
 
@@ -71,28 +71,8 @@
             
               <hr v-if="accounts.length < 3" >
               <div v-if="accounts.length < 3" class=" addNew ">
-                <a type="button" class="btn overlay" data-bs-toggle="modal" id="booking-modal" data-bs-target="#exampleModal">Add Account</a> 
-                <!-- MODAL  -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="booking-modal" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Select account type:</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body d-flex flex-column justify-content-center">
-                        <select v-model="accountType" name="accountType" id="accountType">
-                          <option value="" disabled selected>Select an Option below</option>
-                          <option value="SAVINGS">Savings Account</option>
-                          <option value="CHECKING">Checking Account</option>
-                        </select>
-                      </div>
-                      <div class="modal-footer">
-                        <button @click="createAccounts" type="button" class="btn overlay">Create Account!</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
+                <a  type="button" href="./createCards.html" class="btn overlay">Create Cards</a>
 
               </div>
                    
@@ -478,7 +458,8 @@
                                 <span class="card__label card_label_Gold">{{card.type}}</span>
                                 <img class="card__front-logo card__logo" src="./assets/img/logovisa_Gold.png">
                               </div>
-                              <p class="card_numer card_numer_Gold fw-bold">**** **** **** {{card.number.slice(15)}}</p>
+                              <p v-if="!showCard" class="card_numer card_numer_Gold fw-bold">**** **** **** {{card.number.slice(15)}}</p>
+                              <p v-else class="card_numer card_numer_Gold ">{{card.number}}</p>
                               <div class="card__space-75">
                                 <span class="card__label card_label_Gold">Card holder</span>
                                 <p class="card__info card_info_Gold">{{card.cardholder}}</p>
@@ -495,7 +476,8 @@
                                   <span class="card__label">{{card.type}}</span>
                                   <img class="card__front-logo card__logo" src="./assets/img/logovisa.png">
                                 </div>
-                                <p class="card_numer">**** **** **** {{card.number.slice(15)}}</p>
+                                <p v-if="!showCard" class="card_numer">**** **** **** {{card.number.slice(15)}}</p>
+                                <p v-else class="card_numer">{{card.number}}</p>
                                 <div class="card__space-75">
                                   <span class="card__label">Card holder</span>
                                   <p class="card__info">{{card.cardholder}}</p>
@@ -513,7 +495,8 @@
                                   <img class="card__front-logo card__logo" src="./assets/img/logovisa.png">
                                 </div>
 
-                                <p class="card_numer">**** **** **** {{card.number.slice(15)}}</p>
+                                <p v-if="!showCard" class="card_numer">**** **** **** {{card.number.slice(15)}}</p>
+                                <p v-else class="card_numer">{{card.number}}</p>
                                 <div class="card__space-75">
                                   <span class="card__label">Card holder</span>
                                   <p class="card__info">{{card.cardholder}}</p>
@@ -583,6 +566,7 @@
                             <option :value="card.number">Card: {{card.number}}</option>
                           </select>
                           <button class="btn overlayB" style="color: white;width: 50%;" type="submit" @click="alertDeleteCard">Delete this card.</button>                         
+                          <a class="btn overlayB" style="color: white;width: 50%;" type="submit" @click="toggleCard">Show numbers<a></a>
                         </div>
                     
                   </div>
@@ -632,7 +616,7 @@
               </section>
               <!-- Dropdowns Menu -->
               <section v-if="cards.length > 0" class="dropdown-menues main-sections">
-                <h2>Currently, you own this cards:</h2>
+                <h2 class="mt-4">Currently, you own this cards:</h2>
                 <nav class="button" >
                     <div>
                       
