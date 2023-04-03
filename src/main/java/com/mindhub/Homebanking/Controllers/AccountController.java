@@ -18,6 +18,7 @@ import static com.mindhub.Homebanking.Utils.Utilities.accountNumber;
 import static java.util.stream.Collectors.toList;
 
 @RestController
+@RequestMapping("/api")
 public class AccountController {
 
     @Autowired
@@ -25,17 +26,17 @@ public class AccountController {
     @Autowired
     ClientServices clientServices;
 
-    @GetMapping("/api/accounts")
+    @GetMapping("/accounts")
     public List<AccountDTO> getAccounts(){
         return accountServices.findAll().stream().map(AccountDTO::new).collect(toList());
     }
 
-    @GetMapping("/api/accounts/{id}")
+    @GetMapping("/accounts/{id}")
     public AccountDTO getAccount(@PathVariable Long id){
         return new AccountDTO(accountServices.findById(id));
     }
 
-    @PostMapping("/api/clients/current/accounts")
+    @PostMapping("/clients/current/accounts")
     public ResponseEntity<Object> createAccounts (Authentication authentication, @RequestParam (required = false) AccountType accountType){
 
         Client clientAuthenticated = clientServices.findByEmail(authentication.getName());
@@ -52,13 +53,13 @@ public class AccountController {
         return new ResponseEntity<>("Account successfully created", HttpStatus.CREATED);
     }
 
-    @GetMapping("api/clients/current/accounts")
+    @GetMapping("/clients/current/accounts")
     public List<AccountDTO> getCurrentAccounts(Authentication authentication){
         Client client = clientServices.findByEmail(authentication.getName());
         List<Account> visibleAccounts = client.getAccounts().stream().filter(card -> card.getShowAccount() == true).collect(Collectors.toList());
         return visibleAccounts.stream().map(account -> new AccountDTO(account)).collect(toList());
     }
-    @PatchMapping("/api/clients/current/accounts")
+    @PatchMapping("/clients/current/accounts")
     public ResponseEntity<Object> deleteAccounts (Authentication authentication,
                                                @RequestParam String accountNumber,
                                                @RequestParam String accountDestiny){
