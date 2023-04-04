@@ -1,31 +1,31 @@
-package com.mindhub.Homebanking;
-
-import com.mindhub.Homebanking.Models.*;
-import com.mindhub.Homebanking.Services.*;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.springframework.test.util.AssertionErrors.assertTrue;
-
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-@SpringBootTest
-public class RepositoriesTest {
-    @Autowired
-    AccountServices accountServices;
-    @Autowired
-    CardServices cardServices;
-    @Autowired
-    ClientServices clientServices;
-    @Autowired
-    LoanServices loanServices;
-    @Autowired
-    TransactionServices transactionServices;
-
+//package com.mindhub.Homebanking;
+//
+//import com.mindhub.Homebanking.Models.*;
+//import com.mindhub.Homebanking.Services.*;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.context.SpringBootTest;
+//import static org.hamcrest.MatcherAssert.assertThat;
+//import static org.hamcrest.Matchers.*;
+//import static org.springframework.test.util.AssertionErrors.assertTrue;
+//
+//
+//import java.util.List;
+//import java.util.stream.Collectors;
+//
+//@SpringBootTest
+//public class RepositoriesTest {
+//    @Autowired
+//    AccountServices accountServices;
+//    @Autowired
+//    CardServices cardServices;
+//    @Autowired
+//    ClientServices clientServices;
+//    @Autowired
+//    LoanServices loanServices;
+//    @Autowired
+//    TransactionServices transactionServices;
+//
 //    @Test
 //    public void startsWithVIN(){
 //        List<Account> accounts = accountServices.findAll();
@@ -90,9 +90,9 @@ public class RepositoriesTest {
 //            assertThat(transaction.getDescription(), not(emptyString()));
 //        }
 //    }
-
-
-
-
-
-}
+//
+//
+//
+//
+//
+//}

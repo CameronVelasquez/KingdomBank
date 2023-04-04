@@ -2,7 +2,7 @@
 FROM gradle:7.5.1-jdk11-alpine
 
 # Copia el archivo JAR de la aplicación en el contenedor
- COPY . .
+COPY . .
 
 #build
 RUN gradle build
