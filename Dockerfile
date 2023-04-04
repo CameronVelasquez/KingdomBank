@@ -11,4 +11,4 @@ RUN gradle build
 EXPOSE 8080
 
 # Define el comando para ejecutar la aplicación al iniciar el contenedor
-ENTRYPOINT ["java", "-jar", "build/libs/HomeBanking-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "build/libs/Homebanking-0.0.1-SNAPSHOT.jar"]
